@@ -644,11 +644,7 @@ class HaikuForm extends Component {
             lines[i]["1"]["art"] === "a" &&
             isVowel(lines[i]["2"]["arr"][0].split("")[0]) === true
           ) {
-            lines[i]["1"]["arr"][lines[i]["1"]["arr"].length - 1] = lines[i][
-              "2"
-            ]["arr"][0]
-              .split("")[0]
-              .concat("n");
+            lines[i]["1"]["arr"][lines[i]["1"]["arr"].length - 1] = "an";
           }
         }
       });
