@@ -24,6 +24,7 @@ class App extends Component {
       {
         id: prevState,
         haiku: haikuHere,
+        randomIds: [],
       },
       () => {
         history.push("/haiku");
