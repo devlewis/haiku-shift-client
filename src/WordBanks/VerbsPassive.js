@@ -147,10 +147,7 @@ export default [
     present: { word: "dream", syllables: 1 },
     past: { word: "dreamed", syllables: 1 },
   },
-  {
-    present: { word: "encourage", syllables: 3 },
-    past: { word: "encouraged", syllables: 3 },
-  },
+
   {
     present: { word: "escape", syllables: 2 },
     past: { word: "escaped", syllables: 2 },

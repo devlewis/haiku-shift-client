@@ -10,9 +10,29 @@ class HaikuList extends PureComponent {
     this.context.randomizeHaiku(this.props.history);
   };
 
+  componentWillUnmount() {
+    this.context.eraseIds();
+  }
+
   render() {
     return (
       <div>
+        {this.context.randomIds.length > 0 && (
+          <div className="haikubox">
+            <h1>Haiku Shift</h1>
+            <p>
+              {this.context.haiku[0]}
+              <br />
+              {this.context.haiku[1]}
+              <br />
+              {this.context.haiku[2]}
+            </p>
+            <p>
+              Lines originally found in haikus #{this.context.randomIds[0]}, #
+              {this.context.randomIds[1]}, and #{this.context.randomIds[2]}
+            </p>
+          </div>
+        )}
         <div className="cont_haikulist">
           {this.context.haikuStore.map((h, i) => (
             <div key={i} className="haikulist_box">
@@ -25,7 +45,11 @@ class HaikuList extends PureComponent {
                 <br />
                 {h.haiku[2]}
               </p>
-              {h.penname ? <p>Written By: {h.penname}</p> : <p>anonymous</p>}
+              {h.penname.length > 0 ? (
+                <p>Genreated By: {h.penname}</p>
+              ) : (
+                <p>anonymous</p>
+              )}
             </div>
           ))}
         </div>
@@ -33,9 +57,9 @@ class HaikuList extends PureComponent {
           Haiku Generator
         </button>
         <p>
-          A study in haiku anarchy: click the Haiku Shift button to combine
-          random phrases from the existing haikus. You may discover a beautiful
-          new poem...
+          A study in haiku dada: click the Haiku Shift button to combine random
+          phrases from the existing haikus. You may discover a beautiful new
+          poem...
         </p>
         <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
       </div>

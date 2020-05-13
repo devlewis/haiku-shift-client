@@ -73,12 +73,6 @@ class HaikuBox extends Component {
             </button>
           </div>
         )}
-        {this.context.randomIds.length > 0 && (
-          <p>
-            Lines originally found in haikus #{this.context.randomIds[0]},{" "}
-            {this.context.randomIds[1]}, {this.context.randomIds[2]}
-          </p>
-        )}
         <button onClick={(e) => this.props.history.push("/list")}>
           All haikus
         </button>
@@ -86,9 +80,9 @@ class HaikuBox extends Component {
           Haiku Generator
         </button>
         <p>
-          A study in haiku anarchy: click the Haiku Shift button to combine
-          random phrases from the existing haikus. You may discover a beautiful
-          new poem...
+          A study in haiku dada: click the Haiku Shift button to combine random
+          phrases from the existing haikus. You may discover a beautiful new
+          poem...
         </p>
         <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
       </div>

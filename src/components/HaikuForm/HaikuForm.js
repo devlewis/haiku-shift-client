@@ -238,7 +238,7 @@ class HaikuForm extends Component {
               a["arr"].length > 0
           )
           ["arr"].unshift(adjA.word);
-
+        console.log("pushed an adj");
         line.syllables = line.syllables -= adjA.syllables;
 
         adjs.splice(adjs.indexOf(adjA), 1);
@@ -261,6 +261,8 @@ class HaikuForm extends Component {
             a["arr"].length > 0
         )
         ["arr"].unshift(adjs[0].word);
+
+      console.log("pushed an adj");
 
       line.syllables = line.syllables -= adjs[0].syllables;
     }
@@ -491,6 +493,7 @@ class HaikuForm extends Component {
             let adjs = this.state.adjectivesArr.map((a) => a.word);
             if (
               lines[i][key]["verb"] === false &&
+              lines[i][key]["arr"].length > 0 &&
               (adjs.includes(lines[i][key]["arr"][0]) ||
                 adjs.includes(lines[i][key]["arr"][1]) ||
                 adjs.includes(lines[i][key]["arr"][2]) ||
@@ -528,7 +531,11 @@ class HaikuForm extends Component {
               console.log(lines[i]["syllables"]);
               lines[i]["syllables"] = lines[i]["syllables"] -= adj.syllables;
             }
-            if (key === "1" && lines[i]["art"] === false) {
+            if (
+              key === "1" &&
+              lines[i]["art"] === false &&
+              lines[i][key]["arr"].length > 0
+            ) {
               let art = randomArticle();
               console.log("inside random article", art);
               lines[i][key]["arr"].unshift(art);
@@ -764,7 +771,6 @@ class HaikuForm extends Component {
           },
         },
         () => {
-          console.log(this.state.place);
           if (
             this.state.animal1.syllables === 4 &&
             this.state.place.syllables === 3
