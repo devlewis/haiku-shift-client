@@ -922,7 +922,7 @@ class HaikuForm extends Component {
           </select>
         </div>
         <div className="select_box">
-          <label htmlFor="verb_a">Choose a verb (verb_a)</label>
+          <label htmlFor="verb_a">Choose a verb</label>
           <select
             onChange={this.handleChangeVerbA}
             name="verb_a"
@@ -956,7 +956,7 @@ class HaikuForm extends Component {
           </select>
         </div>
         <div className="select_box">
-          <label htmlFor="verb_p1">Choose a verb</label>
+          <label htmlFor="verb_p1">Choose another verb</label>
           <select
             onChange={this.handleChangeVerbP1}
             name="verb_p1"
@@ -992,7 +992,7 @@ class HaikuForm extends Component {
           </select>
         </div>{" "}
         <div className="select_box">
-          <label htmlFor="verb_p2">Choose a verb</label>
+          <label htmlFor="verb_p2">Choose another verb</label>
           <select
             onChange={this.handleChangeVerbP2}
             name="verb_p2"
