@@ -4,10 +4,16 @@ import { withRouter } from "react-router";
 import "./HaikuList.css";
 
 class HaikuList extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+
   static contextType = Context;
 
   onClickHaikuShift = () => {
     this.context.randomizeHaiku(this.props.history);
+    window.scrollTo(0, this.myRef.current.offsetTop);
   };
 
   componentWillUnmount() {
@@ -18,7 +24,7 @@ class HaikuList extends PureComponent {
     return (
       <div>
         {this.context.randomIds.length > 0 && (
-          <div className="haikubox">
+          <div ref={this.myRef} className="haikubox">
             <h1>Haiku Shift</h1>
             <p>
               {this.context.haiku[0]}
