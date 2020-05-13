@@ -8,7 +8,7 @@ const HaikuApiService = {
       .then((res) =>
         !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
       )
-      .catch();
+      .catch((error) => console.log(error));
   },
 
   insertNewHaiku(haikuArr) {

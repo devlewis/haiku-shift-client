@@ -64,12 +64,17 @@ class HaikuList extends PureComponent {
           <button onClick={(e) => this.props.history.push("/form")}>
             Haiku Generator
           </button>
-          <p>
-            A study in haiku dada: click the Haiku Shift button to combine
-            random phrases from the existing haiku collection. You may discover
-            a beautiful new poem...
-          </p>
-          <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
+          {this.context.haikuStore.length > 0 && (
+            <div>
+              {" "}
+              <p>
+                A study in haiku dada: click the Haiku Shift button to combine
+                random phrases from the existing haiku collection. You may
+                discover a beautiful new poem...
+              </p>
+              <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
+            </div>
+          )}
         </div>
       </div>
     );

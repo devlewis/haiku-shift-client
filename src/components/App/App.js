@@ -6,9 +6,9 @@ import HaikuBox from "../HaikuBox/HaikuBox";
 import HaikuForm from "../HaikuForm/HaikuForm";
 import HaikuList from "../HaikuList/HaikuList";
 import Home from "../Home/Home";
-//import haikuStore from "../../HaikuSTORE";
 import HaikuApiService from "../../haiku-api-service";
 import { Link, Route, Switch } from "react-router-dom";
+import ErrorBoundary from "../ErrorBoundary";
 
 class App extends Component {
   state = {
@@ -16,12 +16,18 @@ class App extends Component {
     randomIds: [],
     penname: "",
     haikuStore: [],
+    error: null,
   };
 
   componentDidMount() {
-    HaikuApiService.getAllHaikus().then((haikus) =>
-      this.fillHaikuStore(haikus)
-    );
+    HaikuApiService.getAllHaikus()
+      .then((haikus) => this.fillHaikuStore(haikus))
+      .catch((error) => {
+        this.setState({
+          error: error,
+        });
+        return new Error();
+      });
   }
 
   eraseIds = () => this.setState({ randomIds: [] });
@@ -49,7 +55,13 @@ class App extends Component {
       HaikuApiService.insertNewHaiku([first, second, third, this.state.penname])
         .then(() => HaikuApiService.getAllHaikus())
         .then((haikus) => this.fillHaikuStore(haikus))
-        .then(() => history.push("/list"));
+        .then(() => history.push("/list"))
+        .catch((error) => {
+          this.setState({
+            error: error,
+          });
+          return new Error();
+        });
     });
   };
 
@@ -88,6 +100,7 @@ class App extends Component {
 
   render() {
     const value = {
+      error: this.state.error,
       eraseIds: this.eraseIds,
       fillHaikuStore: this.fillHaikuStore,
       saveHaiku: this.saveHaiku,
@@ -98,7 +111,9 @@ class App extends Component {
       randomizeHaiku: this.randomizeHaiku,
     };
 
-    return (
+    return this.state.error ? (
+      <ErrorBoundary error={this.state.error} />
+    ) : (
       <Context.Provider value={value}>
         <div className="App">
           <header>
