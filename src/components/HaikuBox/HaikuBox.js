@@ -52,7 +52,7 @@ class HaikuBox extends Component {
           <div className="saveBox">
             <p>
               That haiku looks pretty awesome! Would you like to save it to our
-              bank? If so, optionally enter a penname and click save.
+              bank?
             </p>
             <p>Optional:</p>
             <label htmlFor="penname">Choose a penname for your new haiku</label>
