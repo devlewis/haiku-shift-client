@@ -4,12 +4,16 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import App from "../src/components/App/App";
 import * as serviceWorker from "./serviceWorker";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <ErrorBoundary>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ErrorBoundary>,
+
   /* </React.StrictMode>, */
   document.getElementById("root")
 );

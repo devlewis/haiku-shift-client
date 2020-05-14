@@ -6,23 +6,40 @@ import HaikuBox from "../HaikuBox/HaikuBox";
 import HaikuForm from "../HaikuForm/HaikuForm";
 import HaikuList from "../HaikuList/HaikuList";
 import Home from "../Home/Home";
-import haikuStore from "../../HaikuSTORE";
+import HaikuApiService from "../../haiku-api-service";
 import { Link, Route, Switch } from "react-router-dom";
+import ErrorBoundary from "../ErrorBoundary";
 
 class App extends Component {
   state = {
     haiku: [],
     randomIds: [],
-    id: 4,
     penname: "",
+    haikuStore: [],
+    error: null,
   };
 
+  componentDidMount() {
+    HaikuApiService.getAllHaikus()
+      .then((haikus) => this.fillHaikuStore(haikus))
+      .catch((error) => {
+        this.setState({
+          error: error,
+        });
+        return new Error();
+      });
+  }
+
+  eraseIds = () => this.setState({ randomIds: [] });
+
+  fillHaikuStore = (haikus) =>
+    this.setState({
+      haikuStore: haikus.sort((a, b) => (a.id > b.id ? 1 : -1)),
+    });
+
   updateHaiku = (haikuHere, history) => {
-    console.log(haikuHere);
-    let prevState = this.state.id + 1;
     this.setState(
       {
-        id: prevState,
         haiku: haikuHere,
         randomIds: [],
       },
@@ -34,19 +51,25 @@ class App extends Component {
 
   saveHaiku = (penname, history) => {
     this.setState({ penname: penname }, () => {
-      haikuStore.push({
-        id: this.state.id,
-        date_created: new Date().toDateString(),
-        haiku: this.state.haiku,
-        penname: this.state.penname,
-      });
-      history.push("/list");
+      const [first, second, third] = this.state.haiku;
+      HaikuApiService.insertNewHaiku([first, second, third, this.state.penname])
+        .then(() => HaikuApiService.getAllHaikus())
+        .then((haikus) => this.fillHaikuStore(haikus))
+        .then(() => history.push("/list"))
+        .catch((error) => {
+          this.setState({
+            error: error,
+          });
+          return new Error();
+        });
     });
   };
 
   random3 = () => [0, 2][Math.floor(Math.random() * 2)];
 
   randomizeHaiku = (history) => {
+    const haikuStore = this.state.haikuStore;
+
     const randomHaikuG = () =>
       haikuStore[Math.floor(Math.random() * haikuStore.length)];
 
@@ -70,22 +93,27 @@ class App extends Component {
         randomIds: randomIds,
       },
       () => {
-        history.push("/haiku");
+        history.push("/list");
       }
     );
   };
 
   render() {
     const value = {
+      error: this.state.error,
+      eraseIds: this.eraseIds,
+      fillHaikuStore: this.fillHaikuStore,
       saveHaiku: this.saveHaiku,
       updateHaiku: this.updateHaiku,
       haiku: this.state.haiku,
       randomIds: this.state.randomIds,
-      haikuStore: haikuStore,
+      haikuStore: this.state.haikuStore,
       randomizeHaiku: this.randomizeHaiku,
     };
 
-    return (
+    return this.state.error ? (
+      <ErrorBoundary error={this.state.error} />
+    ) : (
       <Context.Provider value={value}>
         <div className="App">
           <header>

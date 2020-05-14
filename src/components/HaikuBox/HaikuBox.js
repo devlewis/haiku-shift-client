@@ -54,8 +54,9 @@ class HaikuBox extends Component {
               That haiku looks pretty awesome! Would you like to save it to our
               bank?
             </p>
-            <p>Optional:</p>
-            <label htmlFor="penname">Choose a penname for your new haiku</label>
+            <label htmlFor="penname">
+              Optional: Choose a penname for your new haiku
+            </label>
             <input
               onChange={this.handleChangePenname}
               id="penname"
@@ -73,22 +74,16 @@ class HaikuBox extends Component {
             </button>
           </div>
         )}
-        {this.context.randomIds.length > 0 && (
-          <p>
-            Lines originally found in haikus #{this.context.randomIds[0]},{" "}
-            {this.context.randomIds[1]}, {this.context.randomIds[2]}
-          </p>
-        )}
         <button onClick={(e) => this.props.history.push("/list")}>
-          All haikus
+          View all
         </button>
         <button onClick={(e) => this.props.history.push("/form")}>
           Haiku Generator
         </button>
         <p>
-          A study in haiku anarchy: click the Haiku Shift button to combine
-          random phrases from the existing haikus. You may discover a beautiful
-          new poem...
+          A study in haiku dada: click the Haiku Shift button to combine random
+          phrases from the existing haiku collection. You may discover a
+          beautiful new poem...
         </p>
         <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
       </div>
