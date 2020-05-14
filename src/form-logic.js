@@ -399,7 +399,7 @@ const formLogic = (
           randomizer() === 1
         ) {
           console.log("inside second adjective");
-          let adjs = this.adjectivesArr.map((a) => a.word);
+          let adjs = adjectivesArr.map((a) => a.word);
           let randomAdj = adjOneS.splice(
             [Math.floor(Math.random() * adjOneS.length)],
             1
@@ -467,7 +467,7 @@ const formLogic = (
             lines[i][key]["verb"] === false &&
             lines[i]["syllables"] > 0
           ) {
-            let adjectives = this.adjectivesArr.filter(
+            let adjectives = adjectivesArr.filter(
               (a) => a.syllables <= lines[i]["syllables"]
             );
             console.log(adjectives);
