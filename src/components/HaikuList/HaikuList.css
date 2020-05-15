@@ -1,5 +1,4 @@
 .cont_haikulist {
-  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,12 +8,94 @@
   margin: auto;
 }
 
-.haikulist_box {
-  border: solid black 2px;
-  width: 300px;
-  height: 250px;
+.hlist_main {
+  margin-bottom: 30px;
 }
 
+.med {
+  font-size: 14px;
+}
+
+.margin {
+  margin: 0 5%;
+}
+
+.haikubox {
+  margin-bottom: 30px;
+}
+
+.haikubox3 {
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  width: 290px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Special Elite", cursive;
+}
+
+.haikubox3::after {
+  margin: 0 auto;
+  height: 330px;
+  width: 320px;
+  content: "";
+  background: url(../../images/watercolour_splat_.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  opacity: 0.2;
+  top: 140px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  margin-bottom: 50px;
+}
+
+.haikulist_box:nth-child(4n + 2) {
+  background-image: url(../../images/watercolour_splat_.jpg);
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position-y: 10px;
+}
+
+.haikulist_box:nth-child(4n) {
+  background-image: url(../../images/watercolour_splat_.jpg);
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-position-x: 210px;
+  background-position-y: 190px;
+}
+
+.haikulist_box {
+  box-shadow: 0 2.8px 2.2px rgba(000, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  background-color: white;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  width: 300px;
+  height: 250px;
+  font-size: 12px;
+}
+
+.haikulist_h p {
+  margin: 30px 0px;
+  font-family: "Special Elite", "cursive";
+  font-size: 16px;
+}
+
+h1 {
+  margin-top: 50px;
+}
+
+.line {
+  margin: 0 5%;
+}
 @media screen and (min-width: 760px) {
   .cont_haikulist {
     font-size: 15px;
@@ -33,5 +114,25 @@
     width: 225px;
     height: 180px;
     margin-bottom: 20px;
+  }
+
+  .haikubox2 {
+    margin-top: 20px;
+    height: 300px;
+    width: 340px;
+    font-size: 24px;
+  }
+
+  .haikubox2::after {
+    height: 360px;
+    width: 100%;
+    content: "";
+    background: url(../../images/watercolour_splat_.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    opacity: 0.2;
+    top: 10;
+    z-index: -1;
   }
 }

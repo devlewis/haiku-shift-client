@@ -453,10 +453,9 @@ const formLogic = (
               adjs2.includes(lines[i][key]["arr"][3]))
           ) {
             console.log(adjectivesArr);
-            let adj = adjectivesArr.splice(
-              [Math.floor(Math.random() * adjectivesArr.length)],
-              1
-            )[0];
+            let adj = adjectivesArr
+              .filter((adj) => adj.syllables <= lines[i]["syllables"])
+              .splice([Math.floor(Math.random() * adjectivesArr.length)], 1)[0];
             console.log(adj);
             if (adj) {
               lines[i][key]["arr"].unshift(adj.word.concat(","));
@@ -465,7 +464,8 @@ const formLogic = (
             }
           } else if (
             lines[i][key]["verb"] === false &&
-            lines[i]["syllables"] > 0
+            lines[i]["syllables"] > 0 &&
+            lines[i][key]["arr"].length > 0
           ) {
             let adjectives = adjectivesArr.filter(
               (a) => a.syllables <= lines[i]["syllables"]
@@ -574,7 +574,8 @@ const formLogic = (
             }
           } else if (
             word.split("")[word.length - 1] === "y" &&
-            word !== "cay"
+            word !== "cay" &&
+            word !== "donkey"
           ) {
             word = word.split("").slice(0, -1).join("").concat("ies");
           } else if (word === "wolf") {

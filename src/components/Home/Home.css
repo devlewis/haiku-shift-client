@@ -1,0 +1,70 @@
+.cont_home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.nav_shape {
+  margin: auto;
+  background-color: black;
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: -200px;
+  width: 100%;
+  height: 400px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+
+.home_header {
+  margin-top: 225px;
+  margin-bottom: 0px;
+}
+
+a {
+  font-family: "Special Elite", "cursive";
+  text-decoration: none;
+  color: thistle;
+}
+
+.btn_box button {
+  height: 28px;
+  font-size: 15px;
+  border-color: rgb(199, 228, 225);
+  color: darkblue;
+  background-color: rgb(199, 228, 225);
+}
+
+.slant {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.hgbutton {
+  width: 140px;
+}
+
+.homep {
+  text-align: left;
+  margin: 175px 5% 5%;
+  font-size: 20px;
+  background-color: rgba(211, 211, 211, 0.479);
+  padding: 5%;
+}
+
+@media screen and (min-width: 375px) {
+  .btn_box button {
+    font-size: 16px;
+  }
+
+  .slant {
+    width: 110px;
+  }
+
+  .hgbutton {
+    width: 150px;
+  }
+}

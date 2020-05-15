@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import { withRouter } from "react-router";
 import Context from "../../Context";
+import { Link } from "react-router-dom";
+import "./Home.css";
 
 class Home extends PureComponent {
-  state = {};
-
   static contextType = Context;
 
   onClickGenerator = () => {
@@ -18,20 +18,45 @@ class Home extends PureComponent {
   render() {
     return (
       <div className="cont_home">
-        <h1>Haiku Dada</h1>
-        <div className="btn_box">
-          <button onClick={this.onClickGenerator}>Haiku Generator</button>
-          <button onClick={(e) => this.props.history.push("/list")}>
-            View All
-          </button>
-          <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
+        <div className="nav_shape">
+          <h1 className="home_header">
+            <Link to="/">Haiku Dada</Link>
+          </h1>
+          <div className="btn_box">
+            <button className="slant" onClick={this.onClickHaikuShift}>
+              Haiku Shift
+            </button>
+            <button
+              className="slant"
+              onClick={(e) => this.props.history.push("/list")}
+            >
+              Collection
+            </button>
+            <button className="hgbutton" onClick={this.onClickGenerator}>
+              Haiku Generator
+            </button>
+          </div>
         </div>
-        <p>
-          Haiku Dada is a platform where users can auto-generate new haikus by
-          using a madlibs-style form. Users can also view all previously created
-          haikus. Finally, users can view a randomly generated haiku - based on
-          the inputs of previous users.
-        </p>
+        {/* <img src={img} alt="splat" className="splat" /> */}
+        <div className="homep">
+          <p>
+            Haiku Dada is a platform where users can auto-generate new haikus by
+            using a madlibs-style form.{" "}
+          </p>{" "}
+          <p>
+            Since haikus generally consist of 5-syllable, 7-syllable, 5-syllable
+            lines, generator logic controls the syllables and grammar rules for
+            each line.{" "}
+          </p>{" "}
+          <p>
+            {" "}
+            Users can also view the collection of previously created haikus.{" "}
+          </p>{" "}
+          <p>
+            Finally, users can view a randomly generated haiku - based on the
+            inputs of previous users.
+          </p>
+        </div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 import "./HaikuForm.css";
 import Context from "../../Context";
 import animals from "../../WordBanks/Animals";
@@ -36,6 +37,7 @@ class HaikuForm extends Component {
     touched5: false,
     touched6: false,
     touched7: false,
+    touched8: false,
   };
 
   handleSubmit = (e) => {
@@ -105,9 +107,10 @@ class HaikuForm extends Component {
         this.state.verb_a,
         this.state.verb_p1,
         this.state.verb_p2,
-      ].find((obj) => Object.keys(obj).length === 0)
+      ].find((obj) => Object.keys(obj).length === 0) &&
+      this.state.touched8
     ) {
-      return "Complete all selections to save your new haiku!";
+      return "Complete selection to save your new haiku!";
     }
   }
 
@@ -238,6 +241,7 @@ class HaikuForm extends Component {
   handleChangeAdjective2 = (e) => {
     if (e.target.value) {
       this.setState({
+        touched8: true,
         adjective2: {
           word: e.target.value,
           syllables: parseFloat(
@@ -269,181 +273,190 @@ class HaikuForm extends Component {
     const inputError = this.validateInput();
 
     return (
-      <form className="HaikuForm_form" onSubmit={this.handleSubmit}>
-        <p className="tiny">
-          Pro-tip: click on the drop-down menu, then start typing to quickly
-          find a selection.
-        </p>
-        <div className="select_box">
-          <label htmlFor="animal1">Choose an animal</label>
-          <select
-            onChange={this.handleChangeAnimal1}
-            name="animal1"
-            id="animal1"
-            required
-            value={animal1.word}
-          >
-            <option></option>
-            {animalsArr.map((a, i) => (
-              <option key={i} value={a.word}>
-                {a.word}
-              </option>
-            ))}
-          </select>
-        </div>
-        {this.state.touched1 && (
+      <div>
+        <nav>
+          <Link className="navA" to="/">
+            Haiku Dada
+          </Link>
+        </nav>
+        <form className="HaikuForm_form" onSubmit={this.handleSubmit}>
+          <p className="tiny">
+            Pro-tip: click on the drop-down menu, then start typing to quickly
+            find a selection.
+          </p>
           <div className="select_box">
-            <label htmlFor="place">Choose a place</label>
+            <label htmlFor="animal1">Choose an animal</label>
             <select
-              onChange={this.handleChangePlace}
-              name="place"
-              id="place"
+              onChange={this.handleChangeAnimal1}
+              name="animal1"
+              id="animal1"
               required
-              value={place.word}
+              value={animal1.word}
             >
               <option></option>
-              {placesArr.map((p, i) => (
-                <option key={i} value={p.word}>
-                  {p.word}
+              {animalsArr.map((a, i) => (
+                <option key={i} value={a.word}>
+                  {a.word}
                 </option>
               ))}
             </select>
           </div>
-        )}
-        {this.state.touched2 && (
-          <div className="select_box">
-            <label htmlFor="verb_a">Choose a verb</label>
-            <select
-              onChange={this.handleChangeVerbA}
-              name="verb_a"
-              id="verb_a"
-              required
-              value={verb_a.word}
-            >
-              <option></option>
-              {verbs_aArr.map((v, i) => (
-                <option key={i} value={v.present.word}>
-                  {v.present.word}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-        {this.state.touched3 && (
-          <div className="select_box">
-            <label htmlFor="adjective">Choose an adjective</label>
-            <select
-              onChange={this.handleChangeAdjective}
-              name="adjective"
-              id="adjective"
-              required
-              value={adjective.word}
-            >
-              <option></option>
-              {adjectivesArr.map((ad, i) => (
-                <option key={i} value={ad.word}>
-                  {ad.word}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-        {this.state.touched4 && (
-          <div className="select_box">
-            <label htmlFor="verb_p1">Choose another verb</label>
-            <select
-              onChange={this.handleChangeVerbP1}
-              name="verb_p1"
-              id="verb_p1"
-              required
-              value={verb_p1.word}
-            >
-              <option></option>
-              {verbs_pArr.map((v, i) => (
-                <option key={i} value={v.present.word}>
-                  {v.present.word}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-        {this.state.touched5 && (
-          <div className="select_box">
-            <label htmlFor="animal2">Choose another animal</label>
-            <select
-              onChange={this.handleChangeAnimal2}
-              name="animal2"
-              id="animal2"
-              required
-              value={animal2.word}
-            >
-              <option></option>
-              {animalsArr
-                .filter((a) => a.word !== animal1.word && a.syllables < 3)
-                .map((a, i) => (
-                  <option key={i} value={a.word}>
-                    {a.word}
+          {this.state.touched1 && (
+            <div className="select_box">
+              <label htmlFor="place">Choose a place</label>
+              <select
+                onChange={this.handleChangePlace}
+                name="place"
+                id="place"
+                required
+                value={place.word}
+              >
+                <option></option>
+                {placesArr.map((p, i) => (
+                  <option key={i} value={p.word}>
+                    {p.word}
                   </option>
                 ))}
-            </select>
-          </div>
-        )}
-        {this.state.touched6 && (
-          <div className="select_box">
-            <p>two more!</p>
-            <label htmlFor="verb_p2">Choose another verb</label>
-            <select
-              onChange={this.handleChangeVerbP2}
-              name="verb_p2"
-              id="verb_p2"
-              required
-              value={verb_p2.word}
-            >
-              <option></option>
-              {verbs_pArr
-                .filter((v) => v.present.word !== verb_p1.word)
-                .map((v, i) => (
+              </select>
+            </div>
+          )}
+          {this.state.touched2 && (
+            <div className="select_box">
+              <label htmlFor="verb_a">Choose a verb</label>
+              <select
+                onChange={this.handleChangeVerbA}
+                name="verb_a"
+                id="verb_a"
+                required
+                value={verb_a.word}
+              >
+                <option></option>
+                {verbs_aArr.map((v, i) => (
                   <option key={i} value={v.present.word}>
                     {v.present.word}
                   </option>
                 ))}
-            </select>
-          </div>
-        )}
-        {this.state.touched7 && (
-          <div className="select_box">
-            <label htmlFor="adjective2">Choose another adjective</label>
-            <select
-              onChange={this.handleChangeAdjective2}
-              name="adjective2"
-              id="adjective2"
-              required
-              value={adjective2.word}
-            >
-              <option></option>
-              {adjectivesArr2
-                .filter(
-                  (ad) => ad.syllables === 1 && ad.word !== adjective.word
-                )
-                .map((ad, i) => (
+              </select>
+            </div>
+          )}
+          {this.state.touched3 && (
+            <div className="select_box">
+              <label htmlFor="adjective">Choose an adjective</label>
+              <select
+                onChange={this.handleChangeAdjective}
+                name="adjective"
+                id="adjective"
+                required
+                value={adjective.word}
+              >
+                <option></option>
+                {adjectivesArr.map((ad, i) => (
                   <option key={i} value={ad.word}>
                     {ad.word}
                   </option>
                 ))}
-              }
-            </select>
+              </select>
+            </div>
+          )}
+          {this.state.touched4 && (
+            <div className="select_box">
+              <label htmlFor="verb_p1">Choose another verb</label>
+              <select
+                onChange={this.handleChangeVerbP1}
+                name="verb_p1"
+                id="verb_p1"
+                required
+                value={verb_p1.word}
+              >
+                <option></option>
+                {verbs_pArr.map((v, i) => (
+                  <option key={i} value={v.present.word}>
+                    {v.present.word}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          {this.state.touched5 && (
+            <div className="select_box">
+              <label htmlFor="animal2">Choose another animal</label>
+              <select
+                onChange={this.handleChangeAnimal2}
+                name="animal2"
+                id="animal2"
+                required
+                value={animal2.word}
+              >
+                <option></option>
+                {animalsArr
+                  .filter((a) => a.word !== animal1.word && a.syllables < 3)
+                  .map((a, i) => (
+                    <option key={i} value={a.word}>
+                      {a.word}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          )}
+          {this.state.touched6 && (
+            <div className="select_box">
+              <p>two more!</p>
+              <label htmlFor="verb_p2">Choose another verb</label>
+              <select
+                onChange={this.handleChangeVerbP2}
+                name="verb_p2"
+                id="verb_p2"
+                required
+                value={verb_p2.word}
+              >
+                <option></option>
+                {verbs_pArr
+                  .filter((v) => v.present.word !== verb_p1.word)
+                  .map((v, i) => (
+                    <option key={i} value={v.present.word}>
+                      {v.present.word}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          )}
+          {this.state.touched7 && (
+            <div className="select_box">
+              <label htmlFor="adjective2">Choose another adjective</label>
+              <select
+                onChange={this.handleChangeAdjective2}
+                name="adjective2"
+                id="adjective2"
+                required
+                value={adjective2.word}
+              >
+                <option></option>
+                {adjectivesArr2
+                  .filter(
+                    (ad) => ad.syllables === 1 && ad.word !== adjective.word
+                  )
+                  .map((ad, i) => (
+                    <option key={i} value={ad.word}>
+                      {ad.word}
+                    </option>
+                  ))}
+                }
+              </select>
+            </div>
+          )}
+          <div className="HaikuForm__buttons">
+            <p>{inputError}</p>
+            {this.state.touched8 && (
+              <button disabled={inputError !== undefined} type="submit">
+                Save
+              </button>
+            )}
+            <button type="button" onClick={this.handleCancel}>
+              Cancel
+            </button>{" "}
           </div>
-        )}
-        <div className="HaikuForm__buttons">
-          <p>{inputError}</p>
-          <button type="button" onClick={this.handleCancel}>
-            Cancel
-          </button>{" "}
-          <button disabled={inputError !== undefined} type="submit">
-            Save
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     );
   }
 }

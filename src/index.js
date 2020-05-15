@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "../src/components/App/App";
 import * as serviceWorker from "./serviceWorker";
 import ErrorBoundary from "./components/ErrorBoundary";
+import "./index.css";
 
 ReactDOM.render(
   // <React.StrictMode>

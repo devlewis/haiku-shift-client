@@ -1,0 +1,80 @@
+.haikubox2 {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  height: 310px;
+  width: 290px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Special Elite", cursive;
+}
+
+.haikubox2::after {
+  height: 340px;
+  width: 310px;
+  content: "";
+  background: url(../../images/watercolour_splat_.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  margin-bottom: 50px;
+}
+
+.penname {
+  font-size: 12px;
+}
+
+#penname {
+  font-size: 16px;
+  font-family: "Merriweather", "serif";
+}
+
+.savebox {
+  padding-top: 1px;
+  background-color: rgba(211, 211, 211, 0.479);
+  margin: 0 10px 50px;
+  border-radius: 3%;
+}
+
+.shiftp {
+  margin: 0 10px;
+}
+
+.cont_haikubox {
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 350px) {
+  .savebox {
+    margin: 0 25px 50px;
+  }
+
+  .haikubox2 {
+    margin-top: 20px;
+    height: 300px;
+    width: 340px;
+    font-size: 24px;
+  }
+
+  .haikubox2::after {
+    height: 360px;
+    width: 100%;
+    content: "";
+    background: url(../../images/watercolour_splat_.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    opacity: 0.2;
+    top: 10;
+    z-index: -1;
+  }
+}

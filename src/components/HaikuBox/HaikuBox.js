@@ -1,11 +1,21 @@
 import React, { Component } from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter, Redirect, Link } from "react-router-dom";
 import Context from "../../Context";
+import "./HaikuBox.css";
 
 class HaikuBox extends Component {
+  constructor(props) {
+    super(props);
+    this.top = React.createRef();
+  }
+
   static contextType = Context;
 
   state = { penname: "", pennametouched: false, pennameError: null };
+
+  componentDidMount() {
+    window.scrollTo(0, this.top.current);
+  }
 
   onClickSaveHaiku = () => {
     this.context.saveHaiku(this.state.penname, this.props.history);
@@ -21,6 +31,15 @@ class HaikuBox extends Component {
   };
 
   validatePenname() {
+    const letterNumber = /^[0-9a-zA-Z]+$/;
+
+    if (
+      !this.state.penname.match(letterNumber) &&
+      this.state.penname.length > 0
+    ) {
+      return "Penname may not contain special characters or spaces";
+    }
+
     if (this.state.penname.length > 0 && this.state.penname.length > 20) {
       return "Penname must be shorter than 20 characters";
     }
@@ -38,54 +57,57 @@ class HaikuBox extends Component {
     return this.context.haiku.length === 0 ? (
       <Redirect to="/" />
     ) : (
-      <div className="cont_haikubox">
-        <div className="haikubox">
-          <p>
-            {this.context.haiku[0]}
-            <br />
-            {this.context.haiku[1]}
-            <br />
-            {this.context.haiku[2]}
-          </p>
-        </div>
-        {this.context.randomIds.length === 0 && (
-          <div className="saveBox">
-            <p>
-              That haiku looks pretty awesome! Would you like to save it to our
-              bank?
-            </p>
-            <label htmlFor="penname">
-              Optional: Choose a penname for your new haiku
-            </label>
-            <input
-              onChange={this.handleChangePenname}
-              id="penname"
-              type="text"
-              value={penname}
-            />
-            {this.state.pennametouched &&
-              this.state.penname.length > 0 &&
-              pennameError && <p>{pennameError}</p>}
-            <button
-              disabled={pennameError !== undefined}
-              onClick={this.onClickSaveHaiku}
-            >
-              Save
-            </button>
+      <div>
+        <nav>
+          <Link className="navA" to="/">
+            Haiku Dada
+          </Link>
+        </nav>
+        <div ref={this.top} className="cont_haikubox">
+          <div className="haikubox2">
+            <p>{this.context.haiku[0]}</p>
+            <p>{this.context.haiku[1]}</p>
+            <p>{this.context.haiku[2]}</p>
           </div>
-        )}
-        <button onClick={(e) => this.props.history.push("/list")}>
-          View all
-        </button>
-        <button onClick={(e) => this.props.history.push("/form")}>
-          Haiku Generator
-        </button>
-        <p>
-          A study in haiku dada: click the Haiku Shift button to combine random
-          phrases from the existing haiku collection. You may discover a
-          beautiful new poem...
-        </p>
-        <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
+          {this.context.randomIds.length === 0 && (
+            <div className="savebox">
+              <p>That haiku looks pretty awesome!</p>
+              <p>Save it to our collection?</p>
+              <div className="optionalbox">
+                <label className="penname" htmlFor="penname">
+                  Optional: enter a penname
+                </label>
+                <input
+                  onChange={this.handleChangePenname}
+                  id="penname"
+                  type="text"
+                  value={penname}
+                />
+              </div>
+              {this.state.pennametouched &&
+                this.state.penname.length > 0 &&
+                pennameError && <p>{pennameError}</p>}
+              <button
+                className="save"
+                disabled={pennameError !== undefined}
+                onClick={this.onClickSaveHaiku}
+              >
+                Save
+              </button>
+            </div>
+          )}{" "}
+          <button onClick={(e) => this.props.history.push("/form")}>
+            Haiku Generator
+          </button>
+          <button onClick={(e) => this.props.history.push("/list")}>
+            Collection
+          </button>
+          <p className="shiftp">
+            Haiku Shift combines random phrases from the existing haiku
+            collection.
+          </p>
+          <button onClick={this.onClickHaikuShift}>Haiku Shift</button>
+        </div>
       </div>
     );
   }

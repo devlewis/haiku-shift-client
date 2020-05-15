@@ -7,7 +7,7 @@ import HaikuForm from "../HaikuForm/HaikuForm";
 import HaikuList from "../HaikuList/HaikuList";
 import Home from "../Home/Home";
 import HaikuApiService from "../../haiku-api-service";
-import { Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "../ErrorBoundary";
 
 class App extends Component {
@@ -81,6 +81,9 @@ class App extends Component {
     let phrase2 = [randomHaiku["haiku"][1], randomHaiku["id"]];
 
     randomHaiku = randomHaikuG();
+    if (randomHaiku["haiku"].includes(phrase1[0])) {
+      randomHaiku = randomHaikuG();
+    }
     let phrase3 = [randomHaiku["haiku"][this.random3()], randomHaiku["id"]];
 
     let haikuHere = [phrase1[0], phrase2[0], phrase3[0]];
@@ -116,9 +119,6 @@ class App extends Component {
     ) : (
       <Context.Provider value={value}>
         <div className="App">
-          <header>
-            <Link to="/">Haiku Dada</Link>
-          </header>
           <Switch>
             <Route exact path="/" render={() => <Home />} />
             <Route path="/form" render={() => <HaikuForm />} />
