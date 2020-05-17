@@ -37,7 +37,6 @@ class Home extends PureComponent {
             </button>
           </div>
         </div>
-        {/* <img src={img} alt="splat" className="splat" /> */}
         <div className="homep">
           <p>
             Haiku Dada is a platform where users can auto-generate new haikus by

@@ -398,9 +398,9 @@ class HaikuForm extends Component {
               </select>
             </div>
           )}
+          {this.state.touched6 && <p class="med">two more!</p>}
           {this.state.touched6 && (
             <div className="select_box">
-              <p>two more!</p>
               <label htmlFor="verb_p2">Choose another verb</label>
               <select
                 onChange={this.handleChangeVerbP2}

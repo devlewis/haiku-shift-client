@@ -63,7 +63,6 @@ export default [
   { word: "content", syllables: 2 },
   { word: "cool", syllables: 1 },
   { word: "cool-headed", syllables: 3 },
-
   { word: "cordial", syllables: 2 },
   { word: "courageous", syllables: 3 },
   { word: "cowardly", syllables: 3 },
@@ -91,7 +90,6 @@ export default [
   { word: "diligent", syllables: 3 },
   { word: "direct", syllables: 2 },
   { word: "dirty", syllables: 2 },
-
   { word: "discerning", syllables: 3 },
   { word: "discreet", syllables: 2 },
   { word: "disruptive", syllables: 3 },
@@ -100,18 +98,15 @@ export default [
   { word: "dramatic", syllables: 3 },
   { word: "dreary", syllables: 2 },
   { word: "drowsy", syllables: 2 },
-
   { word: "dull", syllables: 1 },
   { word: "dutiful", syllables: 3 },
   { word: "eager", syllables: 2 },
   { word: "earnest", syllables: 2 },
   { word: "efficient", syllables: 3 },
-
   { word: "elfin", syllables: 2 },
   { word: "emotional", syllables: 4 },
   { word: "energetic", syllables: 4 },
   { word: "enterprising", syllables: 4 },
-
   { word: "evasive", syllables: 3 },
   { word: "exacting", syllables: 3 },
   { word: "excellent", syllables: 3 },

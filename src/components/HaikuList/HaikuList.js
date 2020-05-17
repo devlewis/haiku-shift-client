@@ -49,7 +49,8 @@ class HaikuList extends PureComponent {
               </div>
               <p className="shiftp">
                 Lines originally found in haikus #{this.context.randomIds[0]}, #
-                {this.context.randomIds[1]}, and #{this.context.randomIds[2]}
+                {this.context.randomIds[1]}, and #{this.context.randomIds[2]}{" "}
+                below
               </p>
             </div>
             <hr className="line" />

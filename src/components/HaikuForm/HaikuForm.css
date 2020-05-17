@@ -47,11 +47,24 @@ nav {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: stretch;
   }
 
   form {
-    width: 300px;
+    width: 500px;
+    font-size: 1.25em;
+  }
+
+  .select_box {
+    margin: 0 0 35px 5px;
+  }
+
+  select {
+    margin: 0 0 0 25px;
+  }
+
+  .tiny {
+    margin-bottom: 50px;
   }
 }

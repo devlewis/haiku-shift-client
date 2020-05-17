@@ -147,7 +147,7 @@ const formLogic = (
     }
   }
 
-  // ///////////// logic for animal names < 4 goes here ///////////////////
+  //////////////// logic for animal names < 4 goes here ///////////////////
 
   // // ////// FIRST LINE WORK ///////////
   // //make array of lines without verbs
@@ -199,7 +199,7 @@ const formLogic = (
     }
   }
 
-  // ///////////SECOND LINE WORK//////////////
+  /////////////SECOND LINE WORK//////////////
 
   line = linesNoV[0];
   let diffA = line.syllables - 1;
@@ -221,7 +221,7 @@ const formLogic = (
     line.syllables = line.syllables -= adjs[0].syllables;
   }
 
-  ////////random: add verb to this line IF THERE'S ROOM/////////////
+  ////////////random: add verb to this line IF THERE'S ROOM/////////////
   if (randomizer() === 1 && verbs[0].syllables <= line.syllables) {
     //find open array in line
 
@@ -295,7 +295,7 @@ const formLogic = (
           console.log(lines[i]["syllables"]);
           lines[i]["syllables"] = lines[i]["syllables"] -= verb.syllables;
         }
-        //     //////////////push a helper////////////
+        //////////////push a helper////////////
         if (
           key === "1" &&
           lines[i]["2"]["verb"] === true &&
@@ -337,7 +337,7 @@ const formLogic = (
             lines[i]["syllables"] = lines[i]["syllables"] -= 1;
           }
         }
-        ////////randomly push an adj ////////////
+        /////////// randomly push an adj ////////////
         if (
           lines[i]["syllables"] > 0 &&
           lines[i][key]["verb"] === false &&
@@ -432,7 +432,7 @@ const formLogic = (
   });
   console.log(lines);
 
-  /////fill up rest of lines.////////
+  /////////fill up rest of lines./////////
 
   lines.forEach((line, i) => {
     console.log("syllables check", line["syllables"]);
