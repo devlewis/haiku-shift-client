@@ -36,6 +36,7 @@ a {
 }
 
 .btn_box button {
+  width: inherit;
   height: 28px;
   font-size: 15px;
   color: black;
