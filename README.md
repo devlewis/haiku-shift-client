@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Haiku Dada App
 
-## Available Scripts
+### [Haiku Dada App: Live Site](https://haiku-shift-app.now.sh/)
 
-In the project directory, you can run:
+### Documentation
 
-### `yarn start`
+Haikus are poems with lines grouped by syllable, the most
+popular form being 3 lines of 5 syllables, 7 syllables, and 5 syllables.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+"Haiku Generator" logic controls the syllables and grammar rules for
+each line.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Users can also view the "Collection" of previously created haikus.
 
-### `yarn test`
+Finally, by clicking "Haiku Shift", users can view a randomly generated haiku - based on the inputs of previous users.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Screenshots
 
-### `yarn build`
+## ![](src/images/Screen%20Shot%202020-04-25%20at%204.57.52%20PM.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ![](src/images/Screen%20Shot%202020-04-25%20at%204.59.01%20PM.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## ![](src/images/Screen%20Shot%202020-04-25%20at%204.59.35%20PM.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##![](src/images/Screen%20Shot%202020-04-25%20at%205.03.59%20PM.png)
 
-### `yarn eject`
+### Summary
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Haiku Dada is a platform where users can auto-generate new haikus by using a madlibs-style form. Logic controlls the user's inputs and organizes, substitutes and adds syllables / words as needed to fit the 5-7-5 classic haiku form.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Technologies
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+HTML / CSS / JS / React / Node / PostgresQL
