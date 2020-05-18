@@ -8,9 +8,9 @@ Haikus are poems with lines grouped by syllable, the most
 popular form being 3 lines of 5 syllables, 7 syllables, and 5 syllables.
 
 "Haiku Generator" logic controls the syllables and grammar rules for
-each line.
+each line, based primarily on user's inputs.
 
-Users can also view the "Collection" of previously created haikus.
+Users can view the "Collection" of previously created haikus.
 
 Finally, by clicking "Haiku Shift", users can view a randomly generated haiku - based on the inputs of previous users.
 
