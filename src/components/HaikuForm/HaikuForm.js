@@ -280,10 +280,6 @@ class HaikuForm extends Component {
           </Link>
         </nav>
         <form className="HaikuForm_form" onSubmit={this.handleSubmit}>
-          <p className="tiny">
-            Pro-tip: click on the drop-down menu, then start typing to quickly
-            find a selection.
-          </p>
           <div className="select_box">
             <label htmlFor="animal1">Choose an animal</label>
             <select
