@@ -1,6 +1,6 @@
 # Haiku Dada App
 
-### [Haiku Dada App: Live Site](https://haiku-shift-app.now.sh/)
+### [Haiku Dada App: Live Site](https://haiku-shift-client.now.sh/)
 
 ### Documentation
 
