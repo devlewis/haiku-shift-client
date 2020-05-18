@@ -26,7 +26,7 @@ Finally, by clicking "Haiku Shift", users can view a randomly generated haiku - 
 
 ### Summary
 
-Haiku Dada is a platform where users can auto-generate new haikus by using a madlibs-style form. Logic controlls the user's inputs and organizes, substitutes and adds syllables / words as needed to fit the 5-7-5 classic haiku form.
+Haiku Dada is a platform where users can auto-generate new haikus by using a madlibs-style form. Logic controls the user's inputs and organizes, substitutes and adds syllables / words as needed to fit the 5-7-5 classic haiku form.
 
 ### Technologies
 
