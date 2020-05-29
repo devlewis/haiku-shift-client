@@ -1,3 +1,5 @@
+import formHelpers from "./form-helpers";
+
 const formLogic = (
   animal1,
   animal2,
@@ -35,48 +37,24 @@ const formLogic = (
   const adjs = [adjective, adjective2];
   const verbs = [verb_a, verb_p1, verb_p2];
 
-  const punctBank = [";", "...", "."];
-  const articlesBank = ["the", "a"];
-  const helperBank = ["will", "did", "should", "could", "might"];
-
-  const randomArticle = () =>
-    articlesBank.splice(
-      [Math.floor(Math.random() * articlesBank.length)],
-      1
-    )[0];
-
-  const randomHelper = () =>
-    helperBank.splice([Math.floor(Math.random() * helperBank.length)], 1)[0];
-
   const randomVerb_p1 = () =>
     verb_pOneS.splice([Math.floor(Math.random() * verb_pOneS.length)], 1)[0]
       .present;
 
-  const randomizer = () => Math.ceil(Math.random() * 2);
-
-  const randomizer1 = () => Math.floor(Math.random() * 2);
-
-  const isVowel = (c) => ["a", "e", "i", "o", "u"].indexOf(c) !== -1;
-
-  const isH = (c) => ["s", "h", "x", "z"].indexOf(c) !== -1;
-
-  const randomPunct = () =>
-    punctBank.splice([Math.floor(Math.random() * punctBank.length)], 1)[0];
-
   //put one noun per line
 
   //noun4 goes into 7-syllable line; randomly place other nouns
-  secondLine[randomizer()].arr.push(animal1.word);
+  secondLine[formHelpers.randomizer()].arr.push(animal1.word);
   secondLine.syllables -= animal1.syllables;
-  firstLine[randomizer()].arr.push(animal2.word);
+  firstLine[formHelpers.randomizer()].arr.push(animal2.word);
   firstLine.syllables -= animal2.syllables;
-  thirdLine[randomizer()].arr.push(place.word);
+  thirdLine[formHelpers.randomizer()].arr.push(place.word);
   thirdLine.syllables -= place.syllables;
 
   //if more than 3 syllables, adjective pushes first.
 
   if (adjs[0].syllables > 3) {
-    let linesA = lines.find((line) => line["syllables"] >= 4);
+    let linesA = formHelpers.linesA(lines);
     console.log(linesA);
     if (linesA) {
       console.log(Object.values(Object.values(linesA)[0]));
@@ -99,7 +77,7 @@ const formLogic = (
         !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
     );
     if (line) {
-      let art = randomArticle();
+      let art = formHelpers.randomArticle();
       line["arr"].push(verb_a.word, art);
       line["verb"] = true;
       line["art"] = art;
@@ -116,7 +94,7 @@ const formLogic = (
           typeof a === "object" &&
           !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
       );
-      let art = randomArticle();
+      let art = formHelpers.randomArticle();
       if (line) {
         line["arr"].push(verb_a.word, art);
         line["verb"] = true;
@@ -134,7 +112,7 @@ const formLogic = (
             typeof a === "object" &&
             !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
         );
-        let art = randomArticle();
+        let art = formHelpers.randomArticle();
         if (line) {
           line["arr"].push(verb_a.word, art);
           line["verb"] = true;
@@ -178,7 +156,7 @@ const formLogic = (
   linesNoV.splice(linesNoV.indexOf(line), 1);
 
   /////////add adjective//////////
-  if (randomizer() === 1) {
+  if (formHelpers.randomizer() === 1) {
     const diffB = line.syllables - 1;
 
     const adjA = adjs.find((a) => a.syllables <= diffB);
@@ -222,7 +200,7 @@ const formLogic = (
   }
 
   ////////////random: add verb to this line IF THERE'S ROOM/////////////
-  if (randomizer() === 1 && verbs[0].syllables <= line.syllables) {
+  if (formHelpers.randomizer() === 1 && verbs[0].syllables <= line.syllables) {
     //find open array in line
 
     openArr = Object.values(line).find(
@@ -272,7 +250,7 @@ const formLogic = (
           lines[i][key]["arr"].length === 0 &&
           lines[i]["2"]["verb"] === false &&
           lines[i]["syllables"] > 0 &&
-          randomizer() === 1
+          formHelpers.randomizer() === 1
         ) {
           let verb = randomVerb_p1();
           lines[i][key]["arr"].push(verb.word);
@@ -287,7 +265,7 @@ const formLogic = (
           lines[i]["2"]["arr"].length === 0 &&
           lines[i][key]["verb"] === false &&
           lines[i]["syllables"] > 0 &&
-          randomizer() === 1
+          formHelpers.randomizer() === 1
         ) {
           let verb = randomVerb_p1();
           lines[i]["2"]["arr"].push(verb.word);
@@ -303,7 +281,7 @@ const formLogic = (
           lines[i]["syllables"] > 0
         ) {
           console.log("pushed a helper");
-          let help = randomHelper();
+          let help = formHelpers.randomHelper();
           lines[i]["2"]["arr"].unshift(help);
           console.log(lines[i]["syllables"]);
           lines[i]["syllables"] = lines[i]["syllables"] -= 1;
@@ -316,7 +294,7 @@ const formLogic = (
           lines[i][key]["verb"] === false &&
           lines[i][key]["art"] === false
         ) {
-          let art = randomArticle();
+          let art = formHelpers.randomArticle();
           if (
             art === "a" &&
             lines[i]["syllables"] > 1 &&
@@ -324,7 +302,7 @@ const formLogic = (
             lines[i]["2"]["arr"].length === 1
           ) {
             console.log("inside random article", art);
-            let help = randomHelper();
+            let help = formHelpers.randomHelper();
             lines[i][key]["arr"].unshift(art);
             lines[i][key]["art"] = art;
             lines[i]["2"]["arr"].unshift(help);
@@ -342,7 +320,7 @@ const formLogic = (
           lines[i]["syllables"] > 0 &&
           lines[i][key]["verb"] === false &&
           lines[i][key]["arr"].length > 0 &&
-          randomizer() === 1
+          formHelpers.randomizer() === 1
         ) {
           console.log(
             key,
@@ -396,7 +374,7 @@ const formLogic = (
           lines[i][key]["verb"] === false &&
           lines[i]["syllables"] > 0 &&
           lines[i][key]["arr"].length > 0 &&
-          randomizer() === 1
+          formHelpers.randomizer() === 1
         ) {
           console.log("inside second adjective");
           let adjs = adjectivesArr.map((a) => a.word);
@@ -415,7 +393,10 @@ const formLogic = (
             console.log(lines[i]["syllables"]);
             lines[i]["syllables"] = lines[i]["syllables"] -=
               randomAdj.syllables;
-          } else if (lines[i]["syllables"] > 0 && randomizer() === 1) {
+          } else if (
+            lines[i]["syllables"] > 0 &&
+            formHelpers.randomizer() === 1
+          ) {
             let randomAdj = adjOneS.splice(
               [Math.floor(Math.random() * adjOneS.length)],
               1
@@ -486,7 +467,7 @@ const formLogic = (
             lines[i]["art"] === false &&
             lines[i][key]["arr"].length > 0
           ) {
-            let art = randomArticle();
+            let art = formHelpers.randomArticle();
             console.log("inside random article", art);
             lines[i][key]["arr"].unshift(art);
             lines[i][key]["art"] = art;
@@ -524,7 +505,7 @@ const formLogic = (
           let word = lines[i][key]["arr"][lines[i][key]["arr"].length - 1];
 
           if (
-            isH(word.split("")[word.length - 1]) === true &&
+            formHelpers.isH(word.split("")[word.length - 1]) === true &&
             word !== "cheetah"
           ) {
             word = word.concat("es");
@@ -535,7 +516,7 @@ const formLogic = (
           }
 
           if (
-            (isH(word.split("")[word.length - 1]) === true &&
+            (formHelpers.isH(word.split("")[word.length - 1]) === true &&
               word !== "cheetah") ||
             word.slice(word.length - 2, word.length) === "se"
           ) {
@@ -599,7 +580,7 @@ const formLogic = (
 
         if (
           lines[i]["1"]["art"] === "a" &&
-          isVowel(lines[i]["2"]["arr"][0].split("")[0]) === true
+          formHelpers.isVowel(lines[i]["2"]["arr"][0].split("")[0]) === true
         ) {
           lines[i]["1"]["arr"][lines[i]["1"]["arr"].length - 1] = "an";
         }
@@ -626,14 +607,14 @@ const formLogic = (
     line = line.trim();
 
     console.log(line);
-    if (randomizer() === 1) {
-      console.log(randomizer());
+    if (formHelpers.randomizer() === 1) {
+      console.log(formHelpers.randomizer());
       console.log(line);
-      linesFinal[i] = line + randomPunct();
+      linesFinal[i] = line + formHelpers.randomPunct();
       console.log(line);
     }
-    if (randomizer() === 1) {
-      console.log(randomizer());
+    if (formHelpers.randomizer() === 1) {
+      console.log(formHelpers.randomizer());
       console.log(line);
       linesFinal[i] = line[0].toUpperCase() + line.slice(1);
       console.log(line);
@@ -644,9 +625,9 @@ const formLogic = (
 
   const fiveSylLines = [linesFinal[0], linesFinal[2]];
 
-  console.log(randomizer1());
+  console.log(formHelpers.randomizer1());
 
-  const randomLine = fiveSylLines.splice([randomizer1()], 1)[0];
+  const randomLine = fiveSylLines.splice([formHelpers.randomizer1()], 1)[0];
 
   console.log(randomLine);
 
