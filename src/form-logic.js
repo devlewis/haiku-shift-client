@@ -1,4 +1,5 @@
 import formHelpers from "./form-helpers";
+import logicParts from "./form-logic-parts";
 
 const formLogic = (
   animal1,
@@ -42,14 +43,7 @@ const formLogic = (
       .present;
 
   //put one noun per line
-
-  //noun4 goes into 7-syllable line; randomly place other nouns
-  secondLine[formHelpers.randomizer()].arr.push(animal1.word);
-  secondLine.syllables -= animal1.syllables;
-  firstLine[formHelpers.randomizer()].arr.push(animal2.word);
-  firstLine.syllables -= animal2.syllables;
-  thirdLine[formHelpers.randomizer()].arr.push(place.word);
-  thirdLine.syllables -= place.syllables;
+  lines = logicParts.insertNouns(lines, nouns);
 
   //if more than 3 syllables, adjective pushes first.
   if (adjs[0].syllables > 3) {
