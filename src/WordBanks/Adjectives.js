@@ -1,7 +1,5 @@
 import formHelpers from "../form-helpers";
 
-console.log(formHelpers.new_count);
-
 export default [
   { word: "able" },
   { word: "abnormal" },
@@ -353,6 +351,5 @@ export default [
   { word: "zealous" },
 ].map((obj) => {
   const syllables = formHelpers.new_count(obj.word);
-  console.log(obj);
   return { word: obj.word, syllables: syllables };
 });

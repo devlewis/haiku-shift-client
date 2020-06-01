@@ -40,6 +40,5 @@ export default [
   { word: "wood" },
 ].map((obj) => {
   const syllables = formHelpers.new_count(obj.word);
-  console.log(obj);
   return { word: obj.word, syllables: syllables };
 });
