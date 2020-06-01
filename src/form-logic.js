@@ -47,18 +47,7 @@ const formLogic = (
 
   //if more than 3 syllables, adjective pushes first.
   if (adjs[0].syllables > 3) {
-    let linesA = formHelpers.linesA(lines);
-    console.log(linesA);
-    if (linesA) {
-      console.log(Object.values(Object.values(linesA)[0]));
-      let arr = Object.values(linesA).find(
-        (obj) => Object.values(obj)[0].length === 1
-      );
-      console.log(arr);
-      arr["arr"].unshift(adjs[0].word);
-      linesA["syllables"] = linesA["syllables"] -= adjs[0].syllables;
-      adjs.splice(0, 1);
-    }
+    lines = logicParts.insertAdjIf3(lines, adjs);
   }
 
   //if more than 2 syllables, verb_a goes on line 1
@@ -411,7 +400,6 @@ const formLogic = (
               adjs2.includes(lines[i][key]["arr"][2]) ||
               adjs2.includes(lines[i][key]["arr"][3]))
           ) {
-            console.log(adjectivesArr);
             let adj = adjectivesArr
               .filter((adj) => adj.syllables <= lines[i]["syllables"])
               .splice([Math.floor(Math.random() * adjectivesArr.length)], 1)[0];
@@ -429,7 +417,6 @@ const formLogic = (
             let adjectives = adjectivesArr.filter(
               (a) => a.syllables <= lines[i]["syllables"]
             );
-            console.log(adjectives);
             let adj = adjectives.splice(
               [Math.floor(Math.random() * adjectives.length)],
               1

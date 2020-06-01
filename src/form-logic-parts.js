@@ -20,6 +20,22 @@ const logicParts = {
 
     return [firstLine, secondLine, thirdLine];
   },
+
+  insertAdjIf3(lines, adjs) {
+    let linesA = formHelpers.linesA(lines);
+    console.log(linesA);
+    if (linesA) {
+      console.log(Object.values(Object.values(linesA)[0]));
+      let arr = Object.values(linesA).find(
+        (obj) => Object.values(obj)[0].length === 1
+      );
+      console.log(arr);
+      arr["arr"].unshift(adjs[0].word);
+      linesA["syllables"] = linesA["syllables"] -= adjs[0].syllables;
+      adjs.splice(0, 1);
+    }
+    return lines;
+  },
 };
 
 export default logicParts;
