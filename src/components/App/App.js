@@ -9,6 +9,7 @@ import Home from "../Home/Home";
 import HaikuApiService from "../../haiku-api-service";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "../ErrorBoundary";
+import formHelpers from "../../form-helpers";
 
 class App extends Component {
   state = {
@@ -65,35 +66,13 @@ class App extends Component {
     });
   };
 
-  random3 = () => [0, 2][Math.floor(Math.random() * 2)];
-
   randomizeHaiku = (history) => {
     const haikuStore = this.state.haikuStore;
-
-    const randomHaikuG = () =>
-      haikuStore[Math.floor(Math.random() * haikuStore.length)];
-
-    let randomHaiku = randomHaikuG();
-
-    let phrase1 = [randomHaiku["haiku"][this.random3()], randomHaiku["id"]];
-
-    randomHaiku = randomHaikuG();
-    let phrase2 = [randomHaiku["haiku"][1], randomHaiku["id"]];
-
-    randomHaiku = randomHaikuG();
-    if (randomHaiku["haiku"].includes(phrase1[0])) {
-      randomHaiku = randomHaikuG();
-    }
-    let phrase3 = [randomHaiku["haiku"][this.random3()], randomHaiku["id"]];
-
-    let haikuHere = [phrase1[0], phrase2[0], phrase3[0]];
-
-    let randomIds = [phrase1[1], phrase2[1], phrase3[1]];
-
+    const result = formHelpers.randomizeH(haikuStore);
     this.setState(
       {
-        haiku: haikuHere,
-        randomIds: randomIds,
+        haiku: result[0],
+        randomIds: result[1],
       },
       () => {
         history.push("/list");
