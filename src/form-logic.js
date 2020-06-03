@@ -48,66 +48,13 @@ const formLogic = (
   //if more than 3 syllables, adjective pushes first.
   if (adjs[0].syllables > 3) {
     lines = logicParts.insertAdjIf3(lines, adjs);
+    console.log(lines);
   }
 
+  lines = logicParts.insertVerbActive(lines, verb_a, verbs, nouns);
   //if more than 2 syllables, verb_a goes on line 1
-  if (verb_a.syllables <= 2 && secondLine.syllables >= verb_a.syllables + 1) {
-    //pushing verb_a to secondLine
-    let line = Object.values(secondLine).find(
-      (a) =>
-        typeof a === "object" &&
-        !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
-    );
-    if (line) {
-      let art = formHelpers.randomArticle();
-      line["arr"].push(verb_a.word, art);
-      line["verb"] = true;
-      line["art"] = art;
-      verbs.splice(0, 1);
-      secondLine.syllables -= verb_a.syllables;
-      secondLine.syllables -= 1;
-    }
-  } else {
-    let diff = firstLine.syllables - 1;
-    ///if it fits, push verb_a to firstLine
-    if (verb_a.syllables <= diff) {
-      let line = Object.values(firstLine).find(
-        (a) =>
-          typeof a === "object" &&
-          !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
-      );
-      let art = formHelpers.randomArticle();
-      if (line) {
-        line["arr"].push(verb_a.word, art);
-        line["verb"] = true;
-        line["art"] = art;
-        verbs.splice(0, 1);
-        firstLine.syllables -= verb_a.syllables;
-        firstLine.syllables -= 1;
-      }
-    } else {
-      ////if it doesn't fit on firstLine, see if it will fit on thirdLine
-      diff = thirdLine.syllables - 1;
-      if (verb_a.syllables <= diff) {
-        let line = Object.values(thirdLine).find(
-          (a) =>
-            typeof a === "object" &&
-            !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
-        );
-        let art = formHelpers.randomArticle();
-        if (line) {
-          line["arr"].push(verb_a.word, art);
-          line["verb"] = true;
-          line["art"] = art;
-          verbs.splice(0, 1);
-          thirdLine.syllables -= verb_a.syllables;
-          thirdLine.syllables -= 1;
-        }
-      }
-    }
-  }
 
-  //////////////// logic for animal names < 4 goes here ///////////////////
+  ////////////***to do: find multiple adjectives bug. */////////////
 
   // // ////// FIRST LINE WORK ///////////
   // //make array of lines without verbs

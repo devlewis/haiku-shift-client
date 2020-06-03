@@ -33,6 +33,49 @@ const logicParts = {
     }
     return lines;
   },
+
+  insertVerbActive(lines, verb_a, verbs, nouns) {
+    let firstLine = lines[0];
+    let secondLine = lines[1];
+    let thirdLine = lines[2];
+
+    const findLine = (line, verb_a) => {
+      let lineA = Object.values(line).find(
+        (a) =>
+          typeof a === "object" &&
+          !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
+      );
+      if (lineA) {
+        let art = formHelpers.randomArticle();
+        lineA["arr"].push(verb_a.word, art);
+        lineA["verb"] = true;
+        lineA["art"] = art;
+        verbs.splice(0, 1);
+        lineA.syllables -= verb_a.syllables;
+        lineA.syllables -= 1;
+      }
+      return line;
+    };
+
+    if (verb_a.syllables <= 2 && secondLine.syllables >= verb_a.syllables + 1) {
+      secondLine = findLine(secondLine, verb_a);
+    } else {
+      let diff = firstLine.syllables - 1;
+      ///if it fits, push verb_a to firstLine
+      if (verb_a.syllables <= diff) {
+        firstLine = findLine(firstLine, verb_a);
+      } else {
+        ////if it doesn't fit on firstLine, see if it will fit on thirdLine
+        diff = thirdLine.syllables - 1;
+        if (verb_a.syllables <= diff) {
+          thirdLine = findLine(thirdLine, verb_a);
+        }
+      }
+    }
+    lines = [firstLine, secondLine, thirdLine];
+
+    return lines;
+  },
 };
 
 export default logicParts;
