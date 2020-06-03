@@ -16,13 +16,16 @@ let thirdLine = {
   2: { arr: [], verb: false, art: false, plural: false },
   syllables: 5,
 };
-
 let lines = [firstLine, secondLine, thirdLine];
-
-const nouns = [
+let nouns = [
   { word: "alpaca", syllables: 3 },
   { word: "jungle", syllables: 2 },
   { word: "cow", syllables: 1 },
+];
+let adjs = [
+  { word: "cantankerous", syllables: 4 },
+  { word: "blue", syllables: 2 },
+  { word: "beautiful", syllables: 3 },
 ];
 
 describe("insertNouns", () => {
@@ -66,3 +69,8 @@ describe("insertNouns", () => {
     }
   });
 });
+
+// describe("insert long adj first if more than 3 syllables", () => {
+//   let result = logicParts.insertAdjIf3(lines, adjs);
+//   console.log(result);
+// });

@@ -45,7 +45,7 @@ const formHelpers = {
   },
 
   linesA(lines) {
-    lines.find((line) => line["syllables"] >= 4);
+    return lines.find((line) => line["syllables"] >= 4);
   },
 
   randomizeH(haikuStore) {

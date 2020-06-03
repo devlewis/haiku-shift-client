@@ -117,7 +117,6 @@ const formLogic = (
 
   //pick random verb
   const randomVP = verbs.splice([Math.floor(Math.random() * 2)], 1)[0];
-  console.log(randomVP);
   // find line in array that has room for verb's syllables
   let line = linesNoV.find((l) => l.syllables - randomVP.syllables >= 0);
 
@@ -131,10 +130,7 @@ const formLogic = (
   //push verb to line
   openArr["arr"].push(randomVP.word);
   openArr["verb"] = true;
-  console.log("pushed a verb. took away syllables?");
-  console.log(line.syllables);
   line.syllables = line.syllables -= randomVP.syllables;
-  console.log(line.syllables);
   linesNoV.splice(linesNoV.indexOf(line), 1);
 
   /////////add adjective//////////
@@ -142,7 +138,6 @@ const formLogic = (
     const diffB = line.syllables - 1;
 
     const adjA = adjs.find((a) => a.syllables <= diffB);
-    console.log(adjA);
     if (adjA) {
       Object.values(line)
         .find(
@@ -152,7 +147,6 @@ const formLogic = (
             a["arr"].length > 0
         )
         ["arr"].unshift(adjA.word);
-      console.log("pushed an adj");
       line.syllables = line.syllables -= adjA.syllables;
 
       adjs.splice(adjs.indexOf(adjA), 1);
@@ -164,8 +158,6 @@ const formLogic = (
   line = linesNoV[0];
   let diffA = line.syllables - 1;
 
-  console.log(adjs[0]);
-
   if (adjs[0] && adjs[0].syllables <= diffA) {
     Object.values(line)
       .find(
@@ -175,8 +167,6 @@ const formLogic = (
           a["arr"].length > 0
       )
       ["arr"].unshift(adjs[0].word);
-
-    console.log("pushed an adj");
 
     line.syllables = line.syllables -= adjs[0].syllables;
   }
@@ -201,16 +191,10 @@ const formLogic = (
 
   lines = [firstLine, secondLine, thirdLine];
 
-  console.log("pre-change lines", lines);
-
   lines.forEach((line, i) => {
-    console.log("i:", i);
     let lineArr = Object.keys(line);
     lineArr.forEach((key) => {
-      console.log("key:", key);
       if (key === "1" || key === "2") {
-        console.log("arrlength:", lines[i][key]["arr"].length);
-        console.log("syllables:", lines[i]["syllables"]);
         /////////if either array is empty, push a 1-syllable verb/////////
         if (
           key === "1" &&
@@ -222,7 +206,6 @@ const formLogic = (
           let verb = randomVerb_p1();
           lines[i][key]["arr"].push(verb.word);
           lines[i][key]["verb"] = true;
-          console.log(lines[i]["syllables"]);
           lines[i]["syllables"] = lines[i]["syllables"] -= verb.syllables;
         }
 
@@ -237,7 +220,6 @@ const formLogic = (
           let verb = randomVerb_p1();
           lines[i]["2"]["arr"].push(verb.word);
           lines[i]["2"]["verb"] = true;
-          console.log(lines[i]["syllables"]);
           lines[i]["syllables"] = lines[i]["syllables"] -= verb.syllables;
         }
         //////////////push a helper////////////
@@ -247,10 +229,8 @@ const formLogic = (
           lines[i]["2"]["art"] === false &&
           lines[i]["syllables"] > 0
         ) {
-          console.log("pushed a helper");
           let help = formHelpers.randomHelper();
           lines[i]["2"]["arr"].unshift(help);
-          console.log(lines[i]["syllables"]);
           lines[i]["syllables"] = lines[i]["syllables"] -= 1;
         }
         //////////push an article///////////
@@ -268,17 +248,14 @@ const formLogic = (
             lines[i]["2"]["verb"] === true &&
             lines[i]["2"]["arr"].length === 1
           ) {
-            console.log("inside random article", art);
             let help = formHelpers.randomHelper();
             lines[i][key]["arr"].unshift(art);
             lines[i][key]["art"] = art;
             lines[i]["2"]["arr"].unshift(help);
-            console.log(lines[i]["syllables"]);
             lines[i]["syllables"] = lines[i]["syllables"] -= 2;
           } else {
             lines[i][key]["arr"].unshift("the");
             lines[i][key]["art"] = "the";
-            console.log(lines[i]["syllables"]);
             lines[i]["syllables"] = lines[i]["syllables"] -= 1;
           }
         }
@@ -289,14 +266,6 @@ const formLogic = (
           lines[i][key]["arr"].length > 0 &&
           formHelpers.randomizer() === 1
         ) {
-          console.log(
-            key,
-            lines[i]["syllables"],
-            lines[i][key]["arr"].length,
-            lines[i][key]["verb"],
-            lines[i][key]["art"]
-          );
-
           let adjs = adjectivesArr.map((a) => a.word);
           if (
             adjs.includes(lines[i][key]["arr"][0]) ||
@@ -310,15 +279,11 @@ const formLogic = (
               [Math.floor(Math.random() * adjOneS.length)],
               1
             )[0];
-            console.log(randomAdj);
-            console.log("inside first first adj");
             lines[i][key]["arr"].unshift(randomAdj.word + ",");
 
-            console.log(lines[i]["syllables"]);
             lines[i]["syllables"] = lines[i]["syllables"] -=
               randomAdj.syllables;
           } else {
-            console.log("first random adj");
             let adjs = adjectivesArr.filter(
               (a) => a.syllables <= lines[i]["syllables"]
             );
@@ -327,10 +292,8 @@ const formLogic = (
               1
             )[0];
 
-            console.log(randomAdj);
             lines[i][key]["arr"].unshift(randomAdj.word);
 
-            console.log(lines[i]["syllables"]);
             lines[i]["syllables"] = lines[i]["syllables"] -=
               randomAdj.syllables;
           }
@@ -343,7 +306,6 @@ const formLogic = (
           lines[i][key]["arr"].length > 0 &&
           formHelpers.randomizer() === 1
         ) {
-          console.log("inside second adjective");
           let adjs = adjectivesArr.map((a) => a.word);
           let randomAdj = adjOneS.splice(
             [Math.floor(Math.random() * adjOneS.length)],
@@ -355,9 +317,8 @@ const formLogic = (
             adjs.includes(lines[i][key]["arr"][2]) ||
             adjs.includes(lines[i][key]["arr"][3])
           ) {
-            console.log(randomAdj);
             lines[i][key]["arr"].unshift(randomAdj.word.concat(","));
-            console.log(lines[i]["syllables"]);
+
             lines[i]["syllables"] = lines[i]["syllables"] -=
               randomAdj.syllables;
           } else if (
@@ -368,9 +329,9 @@ const formLogic = (
               [Math.floor(Math.random() * adjOneS.length)],
               1
             )[0];
-            console.log(randomAdj);
+
             lines[i][key]["arr"].unshift(randomAdj.word);
-            console.log(lines[i]["syllables"]);
+
             lines[i]["syllables"] = lines[i]["syllables"] -=
               randomAdj.syllables;
           }
@@ -378,20 +339,14 @@ const formLogic = (
       }
     });
   });
-  console.log(lines);
 
   /////////fill up rest of lines./////////
 
   lines.forEach((line, i) => {
-    console.log("syllables check", line["syllables"]);
     while (line["syllables"] > 0) {
       let lineArr = Object.keys(line);
       lineArr.forEach((key) => {
-        console.log();
-        console.log("i:", i);
-        console.log("key:", key);
         if (key === "1" || key || "2") {
-          console.log("syllables:", lines[i]["syllables"]);
           if (
             lines[i][key]["verb"] === false &&
             lines[i][key]["arr"].length > 0 &&
@@ -403,10 +358,10 @@ const formLogic = (
             let adj = adjectivesArr
               .filter((adj) => adj.syllables <= lines[i]["syllables"])
               .splice([Math.floor(Math.random() * adjectivesArr.length)], 1)[0];
-            console.log(adj);
+
             if (adj) {
               lines[i][key]["arr"].unshift(adj.word.concat(","));
-              console.log(lines[i]["syllables"]);
+
               lines[i]["syllables"] = lines[i]["syllables"] -= adj.syllables;
             }
           } else if (
@@ -421,10 +376,9 @@ const formLogic = (
               [Math.floor(Math.random() * adjectives.length)],
               1
             )[0];
-            console.log(lines[i]["syllables"]);
-            console.log(adj);
+
             lines[i][key]["arr"].unshift(adj.word);
-            console.log(lines[i]["syllables"]);
+
             lines[i]["syllables"] = lines[i]["syllables"] -= adj.syllables;
           }
           if (
@@ -433,10 +387,10 @@ const formLogic = (
             lines[i][key]["arr"].length > 0
           ) {
             let art = formHelpers.randomArticle();
-            console.log("inside random article", art);
+
             lines[i][key]["arr"].unshift(art);
             lines[i][key]["art"] = art;
-            console.log(lines[i]["syllables"]);
+
             lines[i]["syllables"] = lines[i]["syllables"] -= 1;
           }
         }
@@ -447,7 +401,6 @@ const formLogic = (
   lines.forEach((line, i) => {
     let lineArr = Object.keys(line);
     lineArr.forEach((key) => {
-      console.log("key:", key);
       if (key === "1" || key === "2") {
         /////  [arr] with [art] (verb_a) push to ["1"]. ////
         if (lines[i]["2"]["art"] === "a" || lines[i]["2"]["art"] === "the") {
@@ -466,7 +419,6 @@ const formLogic = (
           lines[i][key]["arr"][lines[i][key]["arr"].length - 1] !== "trout" &&
           lines[i][key]["arr"][lines[i][key]["arr"].length - 1] !== "cod"
         ) {
-          console.log("trying to add s");
           let word = lines[i][key]["arr"][lines[i][key]["arr"].length - 1];
 
           if (
@@ -488,20 +440,15 @@ const formLogic = (
             if (lines[i]["2"]["arr"].length > 1) {
               lines[i]["2"]["arr"] =
                 lines[i]["2"]["arr"][lines[i]["2"]["arr"].length - 1];
-              console.log(lines[i]["2"]["arr"]);
             } else {
               let lastWord =
                 lines[i]["2"]["arr"][lines[i]["2"]["arr"].length - 1];
               let lastWordObj = verbs_pArr.find(
                 (v) => v.present.word === lastWord
               );
-              console.log(lastWordObj);
+
               let verbsShorter = verbs_pArr.filter(
                 (v) => v.present.syllables === lastWordObj.present.syllables - 1
-              );
-              console.log(verbsShorter, "verbsShorter");
-              console.log(
-                lines[i]["2"]["arr"][lines[i]["2"]["arr"].length - 1]
               );
 
               let shorterVerb =
@@ -512,11 +459,7 @@ const formLogic = (
                 lines[i]["2"]["arr"].length - 1
               ] = shorterVerb;
 
-              console.log(lines[i]["2"]["arr"]);
-
-              console.log(lines[i]["syllables"]);
               lines[i]["syllables"] += 1;
-              console.log(lines[i]["syllables"]);
             }
           } else if (
             word.split("")[word.length - 1] === "y" &&
@@ -539,7 +482,6 @@ const formLogic = (
           lines[i][key]["verb"] === true &&
           lines[i][key]["art"] === false
         ) {
-          console.log("trying to add comma");
           lines[i][key]["arr"][0] = lines[i][key]["arr"][0].concat(",");
         }
 
@@ -554,9 +496,6 @@ const formLogic = (
   });
 
   const linesFinal = lines.map((line) => {
-    console.log(line["1"]["arr"]);
-    console.log(line["2"]["arr"]);
-
     if (Array.isArray(line["1"]["arr"])) {
       line["1"]["arr"] = line["1"]["arr"].join(" ");
     }
@@ -571,34 +510,19 @@ const formLogic = (
   linesFinal.forEach((line, i) => {
     line = line.trim();
 
-    console.log(line);
     if (formHelpers.randomizer() === 1) {
-      console.log(formHelpers.randomizer());
-      console.log(line);
       linesFinal[i] = line + formHelpers.randomPunct();
-      console.log(line);
     }
     if (formHelpers.randomizer() === 1) {
-      console.log(formHelpers.randomizer());
-      console.log(line);
       linesFinal[i] = line[0].toUpperCase() + line.slice(1);
-      console.log(line);
     }
   });
 
-  console.log(linesFinal);
-
   const fiveSylLines = [linesFinal[0], linesFinal[2]];
-
-  console.log(formHelpers.randomizer1());
 
   const randomLine = fiveSylLines.splice([formHelpers.randomizer1()], 1)[0];
 
-  console.log(randomLine);
-
   const otherLine = [fiveSylLines].find((i) => i !== randomLine)[0];
-
-  console.log(otherLine);
 
   let haikuHere = [randomLine, linesFinal[1], otherLine];
 
