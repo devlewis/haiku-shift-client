@@ -40,6 +40,8 @@ const logicParts = {
     let thirdLine = lines[2];
 
     const findLine = (line, verb_a) => {
+      console.log(verb_a);
+      console.log(verbs);
       let lineA = Object.values(line).find(
         (a) =>
           typeof a === "object" &&
@@ -51,20 +53,24 @@ const logicParts = {
         lineA["verb"] = true;
         lineA["art"] = art;
         verbs.splice(0, 1);
-        lineA.syllables -= verb_a.syllables;
-        lineA.syllables -= 1;
+        line.syllables -= verb_a.syllables;
+        line.syllables -= 1;
       }
       return line;
     };
 
     if (verb_a.syllables <= 2 && secondLine.syllables >= verb_a.syllables + 1) {
+      console.log("inside if!");
       secondLine = findLine(secondLine, verb_a);
+      console.log(secondLine);
     } else {
+      console.log("inside if!");
       let diff = firstLine.syllables - 1;
       ///if it fits, push verb_a to firstLine
       if (verb_a.syllables <= diff) {
         firstLine = findLine(firstLine, verb_a);
       } else {
+        console.log("inside if!");
         ////if it doesn't fit on firstLine, see if it will fit on thirdLine
         diff = thirdLine.syllables - 1;
         if (verb_a.syllables <= diff) {

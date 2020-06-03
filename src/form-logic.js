@@ -55,7 +55,7 @@ const formLogic = (
   //if more than 2 syllables, verb_a goes on line 1
 
   ////////////***to do: find multiple adjectives bug. */////////////
-
+  console.log(lines);
   // // ////// FIRST LINE WORK ///////////
   // //make array of lines without verbs
   let linesNoV = [firstLine, secondLine, thirdLine].filter(
