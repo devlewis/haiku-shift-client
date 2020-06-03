@@ -1,45 +1,20 @@
 import logicParts from "./form-logic-parts";
 const expect = require("chai").expect;
-
-let firstLine = {
-  1: { arr: [], verb: false, art: false, plural: false },
-  2: { arr: [], verb: false, art: false, plural: false },
-  syllables: 5,
-};
-let secondLine = {
-  1: { arr: [], verb: false, art: false, plural: false },
-  2: { arr: [], verb: false, art: false, plural: false },
-  syllables: 7,
-};
-let thirdLine = {
-  1: { arr: [], verb: false, art: false, plural: false },
-  2: { arr: [], verb: false, art: false, plural: false },
-  syllables: 5,
-};
-let lines = [firstLine, secondLine, thirdLine];
-let nouns = [
-  { word: "alpaca", syllables: 3 },
-  { word: "jungle", syllables: 2 },
-  { word: "cow", syllables: 1 },
-];
-let adjs = [
-  { word: "cantankerous", syllables: 4 },
-  { word: "blue", syllables: 2 },
-  { word: "beautiful", syllables: 3 },
-];
+import helpers from "./test-helpers";
 
 describe("insertNouns", () => {
+  let lines = helpers.makeEmptyPhrases();
+  let nouns = helpers.makeNouns();
   let result = logicParts.insertNouns(lines, nouns);
 
   it("should return an array of objects", () => {
     expect(result).to.be.an("array").that.has.lengthOf(3);
-
     result.forEach((obj) => {
       expect(obj).to.be.an("object").that.has.all.keys(1, 2, "syllables");
     });
   });
 
-  it("one of each obj arrs should contain a word", () => {
+  it("only one of each obj's 2 arrs should contain a word", () => {
     result.forEach((obj) => {
       if (obj[1]["arr"].length === 0) {
         expect(obj[2]["arr"]).to.have.lengthOf(1);
@@ -70,7 +45,18 @@ describe("insertNouns", () => {
   });
 });
 
-// describe("insert long adj first if more than 3 syllables", () => {
-//   let result = logicParts.insertAdjIf3(lines, adjs);
-//   console.log(result);
-// });
+describe("insert long adj first if more than 3 syllables", () => {
+  let lines = helpers.makeEmptyPhrases();
+  let nouns = helpers.makeNouns();
+  let adjs = helpers.make4Adj();
+  let result = logicParts.insertNouns(lines, nouns);
+  let result1 = logicParts.insertAdjIf3(result, adjs);
+
+  it("should insert the long adj to an obj arr", () => {});
+
+  it("obj with long adj: syllable count should be 0", () => {});
+
+  it("other objs: obj arrs should be length of 1 or 0, no adjs added", () => {});
+
+  it("adjs array should be length of 2 and not include the spliced adj", () => {});
+});
