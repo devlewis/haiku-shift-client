@@ -18,7 +18,6 @@ function setBanks(lines, nouns, adjs, verbs) {
   // //make array of lines without verbs
   let linesNoV = logicParts.noVerbs(lines);
 
-  console.log(linesNoV);
   //pick random verb
   const randomVP = verbs.splice([Math.floor(Math.random() * 2)], 1)[0];
   // find line in array that has room for verb's syllables
@@ -27,15 +26,12 @@ function setBanks(lines, nouns, adjs, verbs) {
   //find open array in line
   let openArr = logicParts.openArr(line, nouns);
 
-  console.log(openArr);
   //push verb to line
   line = logicParts.pushVerb(openArr, line, linesNoV, randomVP);
 
   /////////add adjectives/////////
 
   lines.forEach((line) => logicParts.addAdj(line, adjs, nouns));
-
-  lines.forEach((line) => console.log(Object.values(line)));
 
   ////////////add other verb if room//////////////
   if (lines.some((line) => verbs[0].syllables <= line.syllables)) {
@@ -54,7 +50,6 @@ function setBanks(lines, nouns, adjs, verbs) {
       line = logicParts.pushVerb(openArr, line, linesNoV, verbs[0]);
     }
   }
-  console.log(lines);
   return lines;
 }
 
