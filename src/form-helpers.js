@@ -73,18 +73,42 @@ const formHelpers = {
     return [haikuHere, randomIds];
   },
 
-  new_count(word) {
+  newCount(word) {
     word = word.toLowerCase(); //word.downcase!
 
     if (word.length <= 3) {
       return 1;
     } //return 1 if word.length <= 3
+    let count = 0;
+
+    if (
+      word.slice(word.length - 2, word.length) === "ed" &&
+      word[word.length - 3].match(/[td]/)
+    ) {
+      count = 1;
+    }
 
     word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, ""); //word.sub!(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '')
 
     word = word.replace(/^y/, ""); //word.sub!(/^y/, '')
 
-    return word.match(/[aeiouy]{1,2}/g).length; //word.scan(/[aeiouy]{1,2}/).size
+    return word.match(/[aeiouy]{1,2}/g).length + count;
+  },
+
+  finalizeLines(lines) {
+    return lines.map((line) => {
+      let keyArr = Object.keys(line);
+      console.log(keyArr);
+
+      keyArr.forEach((key) => {
+        if (key !== "syllables") {
+          console.log(line[key]);
+          line[key]["arr"] = line[key]["arr"].join(" ");
+        }
+      });
+
+      return line["1"]["arr"] + " " + line["2"]["arr"];
+    });
   },
 };
 
