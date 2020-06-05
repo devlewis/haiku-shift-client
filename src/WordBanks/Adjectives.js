@@ -37,8 +37,6 @@ export default [
   { word: "candid" },
   { word: "cantankerous" },
   { word: "capable" },
-  { word: "careful" },
-  { word: "careless" },
   { word: "caustic" },
   { word: "cautious" },
   { word: "charming" },
@@ -60,7 +58,6 @@ export default [
   { word: "condescending" },
   { word: "confident" },
   { word: "confused" },
-  { word: "conscientious" },
   { word: "considerate" },
   { word: "content" },
   { word: "cool" },
@@ -243,14 +240,11 @@ export default [
   { word: "proud" },
   { word: "provocative" },
   { word: "prudent" },
-  { word: "punctual" },
   { word: "quarrelsome" },
   { word: "querulous" },
   { word: "quick" },
   { word: "quick-tempered" },
   { word: "quiet" },
-  { word: "realistic" },
-  { word: "reassuring" },
   { word: "reclusive" },
   { word: "reliable" },
   { word: "reluctant" },
@@ -350,6 +344,6 @@ export default [
   { word: "vulnerable" },
   { word: "zealous" },
 ].map((obj) => {
-  const syllables = formHelpers.new_count(obj.word);
+  const syllables = formHelpers.newCount(obj.word);
   return { word: obj.word, syllables: syllables };
 });
