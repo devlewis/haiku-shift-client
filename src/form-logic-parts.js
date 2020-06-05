@@ -13,8 +13,10 @@ const logicParts = {
     //noun4 goes into 7-syllable line; randomly place other nouns
     secondLine[formHelpers.randomizer()].arr.push(animal1.word);
     secondLine.syllables -= animal1.syllables;
+
     firstLine[formHelpers.randomizer()].arr.push(animal2.word);
     firstLine.syllables -= animal2.syllables;
+
     thirdLine[formHelpers.randomizer()].arr.push(place.word);
     thirdLine.syllables -= place.syllables;
 
@@ -101,11 +103,8 @@ const logicParts = {
 
   addAdj(line, adjs, nouns) {
     const diffB = line.syllables - 1;
-    console.log(nouns);
     const adjA = adjs.find((a) => a.syllables <= diffB);
-    console.log(adjA);
     if (adjA) {
-      console.log(nouns);
       Object.values(line)
         .find(
           (a) =>
@@ -117,7 +116,6 @@ const logicParts = {
       line.syllables -= adjA.syllables;
       adjs.splice(adjs.indexOf(adjA), 1);
     }
-    console.log(line);
     return line;
   },
 };
