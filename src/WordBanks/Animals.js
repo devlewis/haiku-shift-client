@@ -203,7 +203,7 @@ export default [
   { name: "Yak" },
   { name: "Zebra" },
 ].map((a) => {
-  const syllables = formHelpers.new_count(a.name);
+  const syllables = formHelpers.newCount(a.name);
   return {
     word: a.name[0].toLowerCase() + a.name.slice(1),
     syllables: syllables,
