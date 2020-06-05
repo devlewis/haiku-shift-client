@@ -454,8 +454,8 @@ export default [
     past: { word: "wrestled" },
   },
 ].map((obj) => {
-  const syllablesPr = formHelpers.new_count(obj.present.word);
-  const syllablesPa = formHelpers.new_count(obj.past.word);
+  const syllablesPr = formHelpers.newCount(obj.present.word);
+  const syllablesPa = formHelpers.newCount(obj.past.word);
   return {
     present: { word: obj.present.word, syllables: syllablesPr },
     past: { word: obj.past.word, syllables: syllablesPa },

@@ -39,6 +39,6 @@ export default [
   { word: "volcano" },
   { word: "wood" },
 ].map((obj) => {
-  const syllables = formHelpers.new_count(obj.word);
+  const syllables = formHelpers.newCount(obj.word);
   return { word: obj.word, syllables: syllables };
 });
