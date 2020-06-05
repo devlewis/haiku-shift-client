@@ -4,10 +4,20 @@ import adjectives from "./WordBanks/Adjectives";
 
 const expect = require("chai").expect;
 //////////testing element no. 1/////////////////
+// const animal1 = { word: "cat", syllables: 1 };
+// const animal2 = { word: "ant", syllables: 1 };
+// const place = { word: "rainforest", syllables: 3 };
+// const adjective = { word: "cantankerous", syllables: 4 };
+// const adjective2 = { word: "red", syllables: 1 };
+// const verb_a = { word: "ask", syllables: 1 };
+// const verb_p1 = { word: "faint", syllables: 1 };
+// const verb_p2 = { word: "pray", syllables: 1 };
+
+///////////testing element no. 2////////////////
 const animal1 = { word: "cat", syllables: 1 };
 const animal2 = { word: "ant", syllables: 1 };
-const place = { word: "rainforest", syllables: 3 };
-const adjective = { word: "cantankerous", syllables: 4 };
+const place = { word: "road", syllables: 1 };
+const adjective = { word: "blue", syllables: 1 };
 const adjective2 = { word: "red", syllables: 1 };
 const verb_a = { word: "ask", syllables: 1 };
 const verb_p1 = { word: "faint", syllables: 1 };

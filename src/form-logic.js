@@ -1,5 +1,5 @@
 import formHelpers from "./form-helpers";
-import logicParts from "./form-logic-parts";
+import setBanks from "./form-setBanks";
 
 const formLogic = (
   animal1,
@@ -42,97 +42,8 @@ const formLogic = (
     verb_pOneS.splice([Math.floor(Math.random() * verb_pOneS.length)], 1)[0]
       .present;
 
-  //put one noun per line
-  lines = logicParts.insertNouns(lines, nouns);
-
-  //if more than 3 syllables, adjective pushes first.
-  if (adjs[0].syllables > 3) {
-    lines = logicParts.insertAdjIf3(lines, adjs);
-    console.log(lines);
-  }
-
-  lines = logicParts.insertVerbActive(lines, verb_a, verbs, nouns);
-  //if more than 2 syllables, verb_a goes on line 1
-
-  ////////////***to do: find multiple adjectives bug. */////////////
-  console.log(lines);
-  // // ////// FIRST LINE WORK ///////////
-  // //make array of lines without verbs
-  let linesNoV = [firstLine, secondLine, thirdLine].filter(
-    (obj) => !Object.values(obj).find((a) => a["verb"])
-  );
-
-  //pick random verb
-  const randomVP = verbs.splice([Math.floor(Math.random() * 2)], 1)[0];
-  // find line in array that has room for verb's syllables
-  let line = linesNoV.find((l) => l.syllables - randomVP.syllables >= 0);
-
-  //find open array in line
-  let openArr = Object.values(line).find(
-    (a) =>
-      typeof a === "object" &&
-      !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
-  );
-
-  //push verb to line
-  openArr["arr"].push(randomVP.word);
-  openArr["verb"] = true;
-  line.syllables = line.syllables -= randomVP.syllables;
-  linesNoV.splice(linesNoV.indexOf(line), 1);
-
-  /////////add adjective//////////
-  if (formHelpers.randomizer() === 1) {
-    const diffB = line.syllables - 1;
-
-    const adjA = adjs.find((a) => a.syllables <= diffB);
-    if (adjA) {
-      Object.values(line)
-        .find(
-          (a) =>
-            typeof a === "object" &&
-            a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0) &&
-            a["arr"].length > 0
-        )
-        ["arr"].unshift(adjA.word);
-      line.syllables = line.syllables -= adjA.syllables;
-
-      adjs.splice(adjs.indexOf(adjA), 1);
-    }
-  }
-
-  /////////////SECOND LINE WORK//////////////
-
-  line = linesNoV[0];
-  let diffA = line.syllables - 1;
-
-  if (adjs[0] && adjs[0].syllables <= diffA) {
-    Object.values(line)
-      .find(
-        (a) =>
-          typeof a === "object" &&
-          a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0) &&
-          a["arr"].length > 0
-      )
-      ["arr"].unshift(adjs[0].word);
-
-    line.syllables = line.syllables -= adjs[0].syllables;
-  }
-
-  ////////////random: add verb to this line IF THERE'S ROOM/////////////
-  if (formHelpers.randomizer() === 1 && verbs[0].syllables <= line.syllables) {
-    //find open array in line
-
-    openArr = Object.values(line).find(
-      (a) =>
-        typeof a === "object" &&
-        !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
-    );
-
-    //push verb to line
-    openArr["arr"].push(verbs[0].word);
-    openArr["verb"] = true;
-    line.syllables -= verbs[0].syllables;
-  }
+  /////////////////////// first, get rid of all word banks that will fit./////////////////
+  lines = setBanks(lines, nouns, adjs, verbs, randomVerb_p1);
 
   ///////// test no.2
 

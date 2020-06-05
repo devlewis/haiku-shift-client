@@ -40,8 +40,6 @@ const logicParts = {
     let thirdLine = lines[2];
 
     const findLine = (line, verb_a) => {
-      console.log(verb_a);
-      console.log(verbs);
       let lineA = Object.values(line).find(
         (a) =>
           typeof a === "object" &&
@@ -60,17 +58,13 @@ const logicParts = {
     };
 
     if (verb_a.syllables <= 2 && secondLine.syllables >= verb_a.syllables + 1) {
-      console.log("inside if!");
       secondLine = findLine(secondLine, verb_a);
-      console.log(secondLine);
     } else {
-      console.log("inside if!");
       let diff = firstLine.syllables - 1;
       ///if it fits, push verb_a to firstLine
       if (verb_a.syllables <= diff) {
         firstLine = findLine(firstLine, verb_a);
       } else {
-        console.log("inside if!");
         ////if it doesn't fit on firstLine, see if it will fit on thirdLine
         diff = thirdLine.syllables - 1;
         if (verb_a.syllables <= diff) {
@@ -81,6 +75,50 @@ const logicParts = {
     lines = [firstLine, secondLine, thirdLine];
 
     return lines;
+  },
+
+  noVerbs(lines) {
+    return lines.filter((obj) => !Object.values(obj).find((a) => a["verb"]));
+  },
+
+  openArr(line, nouns) {
+    return Object.values(line).find(
+      (a) =>
+        typeof a === "object" &&
+        !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0) &&
+        a["verb"] === false
+    );
+  },
+
+  pushVerb(openArr, line, linesNoV, randomVP) {
+    openArr["arr"].push(randomVP.word);
+    openArr["verb"] = true;
+    line.syllables -= randomVP.syllables;
+    linesNoV.splice(linesNoV.indexOf(line), 1);
+
+    return line;
+  },
+
+  addAdj(line, adjs, nouns) {
+    const diffB = line.syllables - 1;
+    console.log(nouns);
+    const adjA = adjs.find((a) => a.syllables <= diffB);
+    console.log(adjA);
+    if (adjA) {
+      console.log(nouns);
+      Object.values(line)
+        .find(
+          (a) =>
+            typeof a === "object" &&
+            a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0) &&
+            a["arr"].length > 0
+        )
+        ["arr"].unshift(adjA.word);
+      line.syllables -= adjA.syllables;
+      adjs.splice(adjs.indexOf(adjA), 1);
+    }
+    console.log(line);
+    return line;
   },
 };
 
