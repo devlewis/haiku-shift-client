@@ -44,7 +44,6 @@ describe("results of whole form are correct", () => {
   );
 
   it("should return an array of 3 strings", () => {
-    console.log(result);
     expect(result).to.be.an("array").of.length(3);
   });
 });

@@ -1,7 +1,6 @@
 import formHelpers from "./form-helpers";
 
 export default function filler1(lines, randomVerb_p1, adjectivesArr, adjOneS) {
-  console.log(lines);
   return lines.forEach((line, i) => {
     let lineArr = Object.keys(line);
     lineArr.forEach((key) => {
@@ -90,7 +89,6 @@ export default function filler1(lines, randomVerb_p1, adjectivesArr, adjOneS) {
               [Math.floor(Math.random() * adjOneS.length)],
               1
             )[0];
-            console.log(randomAdj);
             lines[i][key]["arr"].unshift(randomAdj.word + ",");
 
             lines[i]["syllables"] = lines[i]["syllables"] -=

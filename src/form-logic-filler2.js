@@ -2,7 +2,6 @@ import formHelpers from "./form-helpers";
 
 export default function filler2(lines, adjs2, adjectivesArr) {
   lines.forEach((line, i) => {
-    console.log(line);
     while (line["syllables"] > 0) {
       let lineArr = Object.keys(line);
       lineArr.forEach((key) => {
