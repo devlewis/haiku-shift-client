@@ -98,11 +98,9 @@ const formHelpers = {
   finalizeLines(lines) {
     return lines.map((line) => {
       let keyArr = Object.keys(line);
-      console.log(keyArr);
 
       keyArr.forEach((key) => {
         if (key !== "syllables") {
-          console.log(line[key]);
           line[key]["arr"] = line[key]["arr"].join(" ");
         }
       });

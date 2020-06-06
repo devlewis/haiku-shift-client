@@ -56,7 +56,7 @@ const formLogic = (
 
   filler2(lines, adjs2, adjectivesArr);
 
-  grammar(lines);
+  grammar(lines, verbs_pArr);
 
   const linesFinal = formHelpers.finalizeLines(lines);
 

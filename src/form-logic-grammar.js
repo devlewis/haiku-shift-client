@@ -1,6 +1,6 @@
 import formHelpers from "./form-helpers";
 
-export default function grammar(lines) {
+export default function grammar(lines, verbs_pArr) {
   lines.forEach((line, i) => {
     let lineArr = Object.keys(line);
     lineArr.forEach((key) => {
