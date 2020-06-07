@@ -1,4 +1,4 @@
-import formHelpers from "../form-helpers";
+import formHelpers from "../FormLogic/form-helpers";
 
 export default [
   { word: "able" },

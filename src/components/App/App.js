@@ -9,7 +9,7 @@ import Home from "../Home/Home";
 import HaikuApiService from "../../haiku-api-service";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "../ErrorBoundary";
-import formHelpers from "../../form-helpers";
+import formHelpers from "../../FormLogic/form-helpers";
 
 class App extends Component {
   state = {

@@ -1,6 +1,6 @@
 import formLogic from "./form-logic";
-import verbs_p from "./WordBanks/VerbsPassive";
-import adjectives from "./WordBanks/Adjectives";
+import verbs_p from "../WordBanks/VerbsPassive";
+import adjectives from "../WordBanks/Adjectives";
 
 const expect = require("chai").expect;
 //////////testing element no. 1/////////////////

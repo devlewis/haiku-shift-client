@@ -8,7 +8,7 @@ import verbs_a from "../../WordBanks/VerbsActive";
 import places from "../../WordBanks/PlacesSingular";
 import adjectives from "../../WordBanks/Adjectives";
 import verbs_p from "../../WordBanks/VerbsPassive";
-import formLogic from "../../form-logic";
+import formLogic from "../../FormLogic/form-logic";
 
 class HaikuForm extends Component {
   static contextType = Context;
