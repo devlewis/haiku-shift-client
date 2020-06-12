@@ -37,6 +37,10 @@ const formHelpers = {
     return ["s", "h", "x", "z"].indexOf(c) !== -1;
   },
 
+  isPlur(w) {
+    return ["deer", "moose", "trout", "cod"].indexOf(w) !== -1;
+  },
+
   randomPunct() {
     return punctBank.splice(
       [Math.floor(Math.random() * punctBank.length)],
