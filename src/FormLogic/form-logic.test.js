@@ -14,8 +14,8 @@ const expect = require("chai").expect;
 // const verb_p2 = { word: "pray", syllables: 1 };
 
 ///////////testing element no. 2////////////////
-const animal1 = { word: "cat", syllables: 1 };
-const animal2 = { word: "ant", syllables: 1 };
+const animal1 = { word: "deer", syllables: 1 };
+const animal2 = { word: "moose", syllables: 1 };
 const place = { word: "road", syllables: 1 };
 const adjective = { word: "blue", syllables: 1 };
 const adjective2 = { word: "red", syllables: 1 };
@@ -44,6 +44,7 @@ describe("results of whole form are correct", () => {
   );
 
   it("should return an array of 3 strings", () => {
+    console.log(result);
     expect(result).to.be.an("array").of.length(3);
   });
 });

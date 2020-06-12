@@ -4,26 +4,29 @@ export default function grammar(lines, verbs_pArr) {
   lines.forEach((line, i) => {
     let lineArr = Object.keys(line);
     lineArr.forEach((key) => {
+      ///// don't apply to key "syllables" ////
       if (key === "1" || key === "2") {
-        /////  [arr] with [art] (verb_a) push to ["1"]. ////
+        ///// articles must be in the first section.
+        ///// ex: "pray" "the cats" should be "the cats" "pray" (plural handled later)
+        /////
+        ///// find [arr] with [art] (verb_a); push to ["1"].  ////
         if (lines[i]["2"]["art"] === "a" || lines[i]["2"]["art"] === "the") {
           [lines[i]["1"], lines[i]["2"]] = [lines[i]["2"], lines[i]["1"]];
         }
-        ///// add "s" to singular nouns followed by verbs /////////
+        ///// pluralize singular nouns followed by verbs sans articles ///////
         if (
           key === "1" &&
           lines[i][key]["verb"] === false &&
           lines[i][key]["arr"].length > 0 &&
-          // lines[i][key]["art"] === false || lines[i][key][]
           lines[i]["2"]["verb"] === true &&
           lines[i]["2"]["art"] === false &&
-          lines[i][key]["arr"][lines[i][key]["arr"].length - 1] !== "deer" &&
-          lines[i][key]["arr"][lines[i][key]["arr"].length - 1] !== "moose" &&
-          lines[i][key]["arr"][lines[i][key]["arr"].length - 1] !== "trout" &&
-          lines[i][key]["arr"][lines[i][key]["arr"].length - 1] !== "cod"
+          !formHelpers.isPlur(
+            lines[i][key]["arr"][lines[i][key]["arr"].length - 1]
+          )
         ) {
           let word = lines[i][key]["arr"][lines[i][key]["arr"].length - 1];
-
+          ///////// for words that need "es" at the end: ///////
+          //////// ex. "fox" -> "foxes" /////////
           if (
             formHelpers.isH(word.split("")[word.length - 1]) === true &&
             word !== "cheetah"
@@ -35,15 +38,19 @@ export default function grammar(lines, verbs_pArr) {
             word = word.concat("s");
           }
 
+          /////////if you added a syllable (fox -> foxes): //////////
           if (
             (formHelpers.isH(word.split("")[word.length - 1]) === true &&
               word !== "cheetah") ||
             word.slice(word.length - 2, word.length) === "se"
           ) {
+            //////////////if you have more than one word in the section, delete
+            //////////////the end word to make room for extra syllable
             if (lines[i]["2"]["arr"].length > 1) {
               lines[i]["2"]["arr"] =
                 lines[i]["2"]["arr"][lines[i]["2"]["arr"].length - 1];
             } else {
+              //////////////else,
               let lastWord =
                 lines[i]["2"]["arr"][lines[i]["2"]["arr"].length - 1];
               let lastWordObj = verbs_pArr.find(
