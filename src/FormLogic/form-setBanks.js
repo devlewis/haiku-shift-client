@@ -15,7 +15,7 @@ function setBanks(lines, nouns, adjs, verbs) {
   //otherwise, find an empty space on other lines.
   lines = logicParts.insertVerbActive(lines, verb_a, verbs, nouns);
 
-  // //make array of lines without verbs
+  //make array of lines without verbs
   let linesNoV = logicParts.noVerbs(lines);
 
   //pick random verb

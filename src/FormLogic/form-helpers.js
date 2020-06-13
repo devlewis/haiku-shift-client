@@ -3,6 +3,18 @@ const articlesBank = ["the", "a"];
 const helperBank = ["will", "did", "should", "could", "might"];
 
 const formHelpers = {
+  linesConstructor() {
+    return [this.haikuTemplate(), this.haikuTemplate(), this.haikuTemplate()];
+  },
+
+  haikuTemplate() {
+    return {
+      1: { arr: [], verb: false, art: false, plural: false },
+      2: { arr: [], verb: false, art: false, plural: false },
+      syllables: 5,
+    };
+  },
+
   randomArticle() {
     return articlesBank.splice(
       [Math.floor(Math.random() * articlesBank.length)],

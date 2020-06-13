@@ -4,6 +4,7 @@ import filler1 from "./form-logic-filler1";
 import filler2 from "./form-logic-filler2";
 import grammar from "./form-logic-grammar";
 
+// pass object of parameters. to define inputs. //
 const formLogic = (
   animal1,
   animal2,
@@ -19,23 +20,10 @@ const formLogic = (
   adjectivesArr,
   verbs_pArr
 ) => {
-  let firstLine = {
-    1: { arr: [], verb: false, art: false, plural: false },
-    2: { arr: [], verb: false, art: false, plural: false },
-    syllables: 5,
-  };
-  let secondLine = {
-    1: { arr: [], verb: false, art: false, plural: false },
-    2: { arr: [], verb: false, art: false, plural: false },
-    syllables: 7,
-  };
-  let thirdLine = {
-    1: { arr: [], verb: false, art: false, plural: false },
-    2: { arr: [], verb: false, art: false, plural: false },
-    syllables: 5,
-  };
+  let lines = formHelpers.linesConstructor();
 
-  let lines = [firstLine, secondLine, thirdLine];
+  //////////////////// second line must have 7 syllables; default is 5
+  lines[1].syllables += 2;
 
   const nouns = [animal1, place, animal2];
   const adjs = [adjective, adjective2];
@@ -45,10 +33,8 @@ const formLogic = (
     verb_pOneS.splice([Math.floor(Math.random() * verb_pOneS.length)], 1)[0]
       .present;
 
-  /////////////////////// first, get rid of all word banks that will fit./////////////////
+  //////////////////// first, get rid of all word banks that will fit./////////////////
   lines = setBanks(lines, nouns, adjs, verbs, randomVerb_p1);
-
-  ///////// test no.2
 
   filler1(lines, randomVerb_p1, adjectivesArr, adjOneS);
 
