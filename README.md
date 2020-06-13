@@ -30,4 +30,4 @@ Haiku Dada is a platform where users can auto-generate new haikus by using a mad
 
 ### Technologies
 
-HTML / CSS / JS / React / Node / PostgresQL
+HTML / CSS / JS / React / Node / PostgreSQL
