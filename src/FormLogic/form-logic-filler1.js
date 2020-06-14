@@ -1,6 +1,11 @@
 import formHelpers from "./form-helpers";
 
-export default function filler1(lines, randomVerb_p1, adjectivesArr, adjOneS) {
+export default function filler1(
+  lines,
+  randomverbPassive1,
+  adjectivesArr,
+  adjOneS
+) {
   return lines.forEach((line, i) => {
     let lineArr = Object.keys(line);
     lineArr.forEach((key) => {
@@ -13,7 +18,7 @@ export default function filler1(lines, randomVerb_p1, adjectivesArr, adjOneS) {
           lines[i]["syllables"] > 0 &&
           formHelpers.randomizer() === 1
         ) {
-          let verb = randomVerb_p1();
+          let verb = randomverbPassive1();
           lines[i][key]["arr"].push(verb.word);
           lines[i][key]["verb"] = true;
           lines[i]["syllables"] = lines[i]["syllables"] -= verb.syllables;
@@ -27,7 +32,7 @@ export default function filler1(lines, randomVerb_p1, adjectivesArr, adjOneS) {
           lines[i]["syllables"] > 0 &&
           formHelpers.randomizer() === 1
         ) {
-          let verb = randomVerb_p1();
+          let verb = randomverbPassive1();
           lines[i]["2"]["arr"].push(verb.word);
           lines[i]["2"]["verb"] = true;
           lines[i]["syllables"] = lines[i]["syllables"] -= verb.syllables;

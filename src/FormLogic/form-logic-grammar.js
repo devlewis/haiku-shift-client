@@ -9,7 +9,7 @@ export default function grammar(lines, verbs_pArr) {
         ///// articles must be in the first section.
         ///// ex: "pray" "the cats" should be "the cats" "pray" (plural handled later)
         /////
-        ///// find [arr] with [art] (verb_a); push to ["1"].  ////
+        ///// find [arr] with [art] (verbActive); push to ["1"].  ////
         if (lines[i]["2"]["art"] === "a" || lines[i]["2"]["art"] === "the") {
           [lines[i]["1"], lines[i]["2"]] = [lines[i]["2"], lines[i]["1"]];
         }

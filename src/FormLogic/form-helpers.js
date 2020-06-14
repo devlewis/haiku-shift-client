@@ -3,6 +3,29 @@ const articlesBank = ["the", "a"];
 const helperBank = ["will", "did", "should", "could", "might"];
 
 const formHelpers = {
+  linesPunctCaps(linesFinal) {
+    linesFinal.forEach((line, i) => {
+      line = line.trim();
+      if (formHelpers.randomizer() === 1) {
+        linesFinal[i] = line + formHelpers.randomPunct();
+      }
+      if (formHelpers.randomizer() === 1) {
+        linesFinal[i] = line[0].toUpperCase() + line.slice(1);
+      }
+    });
+    return linesFinal;
+  },
+
+  linesRandomizer(linesFinal) {
+    const sevenSylLines = linesFinal.splice(1, 1)[0];
+
+    const randomLine = linesFinal.splice([formHelpers.randomizer1()], 1)[0];
+
+    const otherLine = linesFinal[0];
+
+    return [randomLine, sevenSylLines, otherLine];
+  },
+
   linesConstructor() {
     return [this.haikuTemplate(), this.haikuTemplate(), this.haikuTemplate()];
   },

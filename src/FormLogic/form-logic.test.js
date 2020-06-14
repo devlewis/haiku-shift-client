@@ -9,9 +9,9 @@ const expect = require("chai").expect;
 // const place = { word: "rainforest", syllables: 3 };
 // const adjective = { word: "cantankerous", syllables: 4 };
 // const adjective2 = { word: "red", syllables: 1 };
-// const verb_a = { word: "ask", syllables: 1 };
-// const verb_p1 = { word: "faint", syllables: 1 };
-// const verb_p2 = { word: "pray", syllables: 1 };
+// const verbActive = { word: "ask", syllables: 1 };
+// const verbPassive1 = { word: "faint", syllables: 1 };
+// const verbPassive2 = { word: "pray", syllables: 1 };
 
 ///////////testing element no. 2////////////////
 const animal1 = { word: "deer", syllables: 1 };
@@ -19,10 +19,10 @@ const animal2 = { word: "moose", syllables: 1 };
 const place = { word: "road", syllables: 1 };
 const adjective = { word: "blue", syllables: 1 };
 const adjective2 = { word: "red", syllables: 1 };
-const verb_a = { word: "ask", syllables: 1 };
-const verb_p1 = { word: "faint", syllables: 1 };
-const verb_p2 = { word: "pray", syllables: 1 };
-let verb_pOneS = verbs_p.filter((v) => v.present.syllables === 1);
+const verbActive = { word: "ask", syllables: 1 };
+const verbPassive1 = { word: "faint", syllables: 1 };
+const verbPassive2 = { word: "pray", syllables: 1 };
+let verbPassiveOneS = verbs_p.filter((v) => v.present.syllables === 1);
 let adjOneS = adjectives.filter((a) => a.syllables === 1);
 let adjs2 = adjectives.map((a) => a.word);
 
@@ -33,10 +33,10 @@ describe("results of whole form are correct", () => {
     place,
     adjective,
     adjective2,
-    verb_a,
-    verb_p1,
-    verb_p2,
-    verb_pOneS,
+    verbActive,
+    verbPassive1,
+    verbPassive2,
+    verbPassiveOneS,
     adjOneS,
     adjs2,
     adjectives,

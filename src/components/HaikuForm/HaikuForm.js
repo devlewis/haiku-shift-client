@@ -22,13 +22,13 @@ class HaikuForm extends Component {
     verbs_pArr: verbs_p,
     verbs_pArr2: verbs_p,
     animal1: {},
-    verb_a: {},
+    verbActive: {},
     place: {},
     adjective: {},
-    verb_p1: {},
+    verbPassive1: {},
     animal2: {},
     adjective2: {},
-    verb_p2: {},
+    verbPassive2: {},
     p_error: null,
     touched1: false,
     touched2: false,
@@ -49,37 +49,37 @@ class HaikuForm extends Component {
       place,
       adjective,
       adjective2,
-      verb_a,
-      verb_p1,
-      verb_p2,
+      verbActive,
+      verbPassive1,
+      verbPassive2,
       adjectivesArr,
       verbs_pArr,
     } = this.state;
 
-    let verb_pOneS = this.state.verbs_pArr.filter(
+    let verbPassiveOneS = this.state.verbs_pArr.filter(
       (v) => v.present.syllables === 1
     );
     let adjOneS = this.state.adjectivesArr.filter((a) => a.syllables === 1);
 
     let adjs2 = this.state.adjectivesArr.map((a) => a.word);
 
-    ///////////test no. 1 went here and is now in HaikuForm//////////////////
-
-    let haikuHere = formLogic(
+    let inputs = [
       animal1,
       animal2,
       place,
       adjective,
       adjective2,
-      verb_a,
-      verb_p1,
-      verb_p2,
-      verb_pOneS,
+      verbActive,
+      verbPassive1,
+      verbPassive2,
+      verbPassiveOneS,
       adjOneS,
       adjs2,
       adjectivesArr,
-      verbs_pArr
-    );
+      verbs_pArr,
+    ];
+
+    let haikuHere = formLogic(...inputs);
 
     this.context.updateHaiku(haikuHere, this.props.history);
   };
@@ -96,9 +96,9 @@ class HaikuForm extends Component {
         this.state.place,
         this.state.adjective,
         this.state.adjective2,
-        this.state.verb_a,
-        this.state.verb_p1,
-        this.state.verb_p2,
+        this.state.verbActive,
+        this.state.verbPassive1,
+        this.state.verbPassive2,
       ].find((obj) => Object.keys(obj).length === 0) &&
       this.state.touched8
     ) {
@@ -151,7 +151,7 @@ class HaikuForm extends Component {
     if (e.target.value) {
       this.setState({
         touched3: true,
-        verb_a: {
+        verbActive: {
           word: e.target.value,
           syllables: parseFloat(
             verbs_a.find((v) => v.present.word === e.target.value).present
@@ -181,7 +181,7 @@ class HaikuForm extends Component {
       this.setState(
         {
           touched5: true,
-          verb_p1: {
+          verbPassive1: {
             word: e.target.value,
             syllables: parseFloat(
               verbs_p.find((v) => v.present.word === e.target.value).present
@@ -190,7 +190,7 @@ class HaikuForm extends Component {
           },
         },
         () => {
-          if (this.state.verb_p1.syllables === 3) {
+          if (this.state.verbPassive1.syllables === 3) {
             this.setState({
               adjectivesArr2: adjectives.filter((ad) => ad.syllables === 1),
             });
@@ -219,7 +219,7 @@ class HaikuForm extends Component {
     if (e.target.value) {
       this.setState({
         touched7: true,
-        verb_p2: {
+        verbPassive2: {
           word: e.target.value,
           syllables: parseFloat(
             verbs_p.find((v) => v.present.word === e.target.value).present
@@ -253,13 +253,13 @@ class HaikuForm extends Component {
       adjectivesArr2,
       verbs_pArr,
       animal1,
-      verb_a,
+      verbActive,
       place,
       adjective,
-      verb_p1,
+      verbPassive1,
       animal2,
       adjective2,
-      verb_p2,
+      verbPassive2,
     } = this.state;
 
     const inputError = this.validateInput();
@@ -310,13 +310,13 @@ class HaikuForm extends Component {
           )}
           {this.state.touched2 && (
             <div className="select_box">
-              <label htmlFor="verb_a">Choose a verb</label>
+              <label htmlFor="verbActive">Choose a verb</label>
               <select
                 onChange={this.handleChangeVerbA}
-                name="verb_a"
-                id="verb_a"
+                name="verbActive"
+                id="verbActive"
                 required
-                value={verb_a.word}
+                value={verbActive.word}
               >
                 <option></option>
                 {verbs_aArr.map((v, i) => (
@@ -348,13 +348,13 @@ class HaikuForm extends Component {
           )}
           {this.state.touched4 && (
             <div className="select_box">
-              <label htmlFor="verb_p1">Choose another verb</label>
+              <label htmlFor="verbPassive1">Choose another verb</label>
               <select
                 onChange={this.handleChangeVerbP1}
-                name="verb_p1"
-                id="verb_p1"
+                name="verbPassive1"
+                id="verbPassive1"
                 required
-                value={verb_p1.word}
+                value={verbPassive1.word}
               >
                 <option></option>
                 {verbs_pArr.map((v, i) => (
@@ -389,17 +389,17 @@ class HaikuForm extends Component {
           {this.state.touched6 && <p className="med">two more!</p>}
           {this.state.touched6 && (
             <div className="select_box">
-              <label htmlFor="verb_p2">Choose another verb</label>
+              <label htmlFor="verbPassive2">Choose another verb</label>
               <select
                 onChange={this.handleChangeVerbP2}
-                name="verb_p2"
-                id="verb_p2"
+                name="verbPassive2"
+                id="verbPassive2"
                 required
-                value={verb_p2.word}
+                value={verbPassive2.word}
               >
                 <option></option>
                 {verbs_pArr
-                  .filter((v) => v.present.word !== verb_p1.word)
+                  .filter((v) => v.present.word !== verbPassive1.word)
                   .map((v, i) => (
                     <option key={i} value={v.present.word}>
                       {v.present.word}
@@ -428,7 +428,6 @@ class HaikuForm extends Component {
                       {ad.word}
                     </option>
                   ))}
-                }
               </select>
             </div>
           )}

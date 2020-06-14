@@ -1,7 +1,13 @@
 import logicParts from "./form-logic-parts";
+import formHelpers from "./form-helpers";
 
-function setBanks(lines, nouns, adjs, verbs) {
-  const verb_a = verbs[0];
+function setBanks(nouns, adjs, verbs) {
+  let lines = formHelpers.linesConstructor();
+
+  //////////////////// second line must have 7 syllables; default is 5
+  lines[1].syllables += 2;
+
+  const verbActive = verbs[0];
 
   //put one noun per line
   lines = logicParts.insertNouns(lines, nouns);
@@ -11,9 +17,9 @@ function setBanks(lines, nouns, adjs, verbs) {
     lines = logicParts.insertAdjIf3(lines, adjs);
   }
 
-  //if more than 2 syllables, verb_a goes on line 1;
+  //if more than 2 syllables, verbActive goes on line 1;
   //otherwise, find an empty space on other lines.
-  lines = logicParts.insertVerbActive(lines, verb_a, verbs, nouns);
+  lines = logicParts.insertVerbActive(lines, verbActive, verbs, nouns);
 
   //make array of lines without verbs
   let linesNoV = logicParts.noVerbs(lines);

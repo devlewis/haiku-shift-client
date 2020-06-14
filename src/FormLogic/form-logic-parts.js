@@ -36,12 +36,12 @@ const logicParts = {
     return lines;
   },
 
-  insertVerbActive(lines, verb_a, verbs, nouns) {
+  insertVerbActive(lines, verbActive, verbs, nouns) {
     let firstLine = lines[0];
     let secondLine = lines[1];
     let thirdLine = lines[2];
 
-    const findLine = (line, verb_a) => {
+    const findLine = (line, verbActive) => {
       let lineA = Object.values(line).find(
         (a) =>
           typeof a === "object" &&
@@ -49,28 +49,31 @@ const logicParts = {
       );
       if (lineA) {
         let art = formHelpers.randomArticle();
-        lineA["arr"].push(verb_a.word, art);
+        lineA["arr"].push(verbActive.word, art);
         lineA["verb"] = true;
         lineA["art"] = art;
         verbs.splice(0, 1);
-        line.syllables -= verb_a.syllables;
+        line.syllables -= verbActive.syllables;
         line.syllables -= 1;
       }
       return line;
     };
 
-    if (verb_a.syllables <= 2 && secondLine.syllables >= verb_a.syllables + 1) {
-      secondLine = findLine(secondLine, verb_a);
+    if (
+      verbActive.syllables <= 2 &&
+      secondLine.syllables >= verbActive.syllables + 1
+    ) {
+      secondLine = findLine(secondLine, verbActive);
     } else {
       let diff = firstLine.syllables - 1;
-      ///if it fits, push verb_a to firstLine
-      if (verb_a.syllables <= diff) {
-        firstLine = findLine(firstLine, verb_a);
+      ///if it fits, push verbActive to firstLine
+      if (verbActive.syllables <= diff) {
+        firstLine = findLine(firstLine, verbActive);
       } else {
         ////if it doesn't fit on firstLine, see if it will fit on thirdLine
         diff = thirdLine.syllables - 1;
-        if (verb_a.syllables <= diff) {
-          thirdLine = findLine(thirdLine, verb_a);
+        if (verbActive.syllables <= diff) {
+          thirdLine = findLine(thirdLine, verbActive);
         }
       }
     }
