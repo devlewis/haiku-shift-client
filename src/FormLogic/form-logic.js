@@ -33,13 +33,13 @@ const formLogic = (
   //////////////////// first, get rid of all user word inputs that will fit./////////////////
   let lines = setBanks(nouns, adjs, verbs, randomverbPassive1);
 
+  /////////add one adjective, one helper, one random verb if there's room, and a second adjective/////////
   filler1(lines, randomverbPassive1, adjectivesArr, adjOneS);
 
-  /////////fill up rest of lines./////////
-
+  /////////fill up rest of lines until all syllables are full./////////
   filler2(lines, adjs2, adjectivesArr);
 
-  /////////apply grammar rules like
+  /////////apply grammar rules.
   grammar(lines, verbs_pArr);
 
   let linesFinal = formHelpers.finalizeLines(lines);

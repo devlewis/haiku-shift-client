@@ -39,17 +39,32 @@ const logicParts = {
       verbActive.syllables <= 2 &&
       secondLine.syllables >= verbActive.syllables + 1
     ) {
-      secondLine = formHelpers.findLine(secondLine, verbActive, verbs, nouns);
+      secondLine = formHelpers.addVerbActive(
+        secondLine,
+        verbActive,
+        verbs,
+        nouns
+      );
     } else {
       let diff = firstLine.syllables - 1;
       ///if it fits, push verbActive to firstLine
       if (verbActive.syllables <= diff) {
-        firstLine = formHelpers.findLine(firstLine, verbActive, verbs, nouns);
+        firstLine = formHelpers.addVerbActive(
+          firstLine,
+          verbActive,
+          verbs,
+          nouns
+        );
       } else {
         ////if it doesn't fit on firstLine, see if it will fit on thirdLine
         diff = thirdLine.syllables - 1;
         if (verbActive.syllables <= diff) {
-          thirdLine = formHelpers.findLine(thirdLine, verbActive, verbs, nouns);
+          thirdLine = formHelpers.addVerbActive(
+            thirdLine,
+            verbActive,
+            verbs,
+            nouns
+          );
         }
       }
     }

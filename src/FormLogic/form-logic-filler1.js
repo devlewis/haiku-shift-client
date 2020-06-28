@@ -1,4 +1,4 @@
-import formHelpers from "./form-helpers";
+import pushers from "./pushers";
 
 export default function filler1(
   lines,
@@ -13,16 +13,16 @@ export default function filler1(
         let line = lines[i];
 
         /////////if either array is empty, push a 1-syllable verb/////////
-        formHelpers.pushRandomPassiveVerb(key, randomverbPassive1, line);
+        pushers.pushRandomPassiveVerb(key, randomverbPassive1, line);
 
         //////////////push a helper////////////
-        formHelpers.pushRandomHelper(key, line);
+        pushers.pushRandomHelper(key, line);
 
         //////////push an article///////////
-        formHelpers.pushArticle(key, line);
+        pushers.pushArticle(key, line);
 
         /////////// randomly push an adj ////////////
-        formHelpers.pushRandomAdjective(key, line, adjectivesArr, adjOneS);
+        pushers.pushRandomAdjective(key, line, adjectivesArr, adjOneS);
       }
     });
   });
