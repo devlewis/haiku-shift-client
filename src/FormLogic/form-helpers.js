@@ -3,6 +3,44 @@ const articlesBank = ["the", "a"];
 const helperBank = ["will", "did", "should", "could", "might"];
 
 const formHelpers = {
+  pushRandomHelper(key, line) {
+    if (
+      key === "1" &&
+      line["2"]["verb"] === true &&
+      line["2"]["art"] === false &&
+      line["syllables"] > 0
+    ) {
+      let help = this.randomHelper();
+      line["2"]["arr"].unshift(help);
+      line["syllables"] = line["syllables"] -= 1;
+    }
+  },
+  pushRandomPassiveVerb(key, randomverbPassive1, line) {
+    if (
+      key === "1" &&
+      line[key]["arr"].length === 0 &&
+      line["2"]["verb"] === false &&
+      line["syllables"] > 0 &&
+      this.randomizer() === 1
+    ) {
+      let verb = randomverbPassive1();
+      line[key]["arr"].push(verb.word);
+      line[key]["verb"] = true;
+      line["syllables"] = line["syllables"] -= verb.syllables;
+    } else if (
+      key === "1" &&
+      line["2"]["arr"].length === 0 &&
+      line[key]["verb"] === false &&
+      line["syllables"] > 0 &&
+      this.randomizer() === 1
+    ) {
+      let verb = randomverbPassive1();
+      line["2"]["arr"].push(verb.word);
+      line["2"]["verb"] = true;
+      line["syllables"] = line["syllables"] -= verb.syllables;
+    }
+  },
+
   findLine(line, verbActive, verbs, nouns) {
     let lineA = Object.values(line).find(
       (a) =>

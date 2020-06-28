@@ -9,45 +9,14 @@ export default function filler1(
   return lines.forEach((line, i) => {
     let lineArr = Object.keys(line);
     lineArr.forEach((key) => {
-      if (key === "1" || key === "2") {
+      if (key !== "syllables") {
         /////////if either array is empty, push a 1-syllable verb/////////
-        if (
-          key === "1" &&
-          lines[i][key]["arr"].length === 0 &&
-          lines[i]["2"]["verb"] === false &&
-          lines[i]["syllables"] > 0 &&
-          formHelpers.randomizer() === 1
-        ) {
-          let verb = randomverbPassive1();
-          lines[i][key]["arr"].push(verb.word);
-          lines[i][key]["verb"] = true;
-          lines[i]["syllables"] = lines[i]["syllables"] -= verb.syllables;
-        }
+        let line = lines[i];
 
-        /////////////if either array is empty, randomly push a 1-syllable verb////////
-        else if (
-          key === "1" &&
-          lines[i]["2"]["arr"].length === 0 &&
-          lines[i][key]["verb"] === false &&
-          lines[i]["syllables"] > 0 &&
-          formHelpers.randomizer() === 1
-        ) {
-          let verb = randomverbPassive1();
-          lines[i]["2"]["arr"].push(verb.word);
-          lines[i]["2"]["verb"] = true;
-          lines[i]["syllables"] = lines[i]["syllables"] -= verb.syllables;
-        }
+        formHelpers.pushRandomPassiveVerb(key, randomverbPassive1, line);
+
         //////////////push a helper////////////
-        if (
-          key === "1" &&
-          lines[i]["2"]["verb"] === true &&
-          lines[i]["2"]["art"] === false &&
-          lines[i]["syllables"] > 0
-        ) {
-          let help = formHelpers.randomHelper();
-          lines[i]["2"]["arr"].unshift(help);
-          lines[i]["syllables"] = lines[i]["syllables"] -= 1;
-        }
+
         //////////push an article///////////
         if (
           key === ["1"] &&
