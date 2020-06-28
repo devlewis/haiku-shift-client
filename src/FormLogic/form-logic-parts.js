@@ -2,15 +2,11 @@ import formHelpers from "./form-helpers";
 
 const logicParts = {
   insertNouns(lines, nouns) {
-    let firstLine = lines[0];
-    let secondLine = lines[1];
-    let thirdLine = lines[2];
+    let [firstLine, secondLine, thirdLine] = lines;
 
-    let animal1 = nouns[0];
-    let place = nouns[1];
-    let animal2 = nouns[2];
+    let [animal1, place, animal2] = nouns;
 
-    //noun4 goes into 7-syllable line; randomly place other nouns
+    //animal1 has potential to be the longest, so goes into 7-syllable line; randomly place other nouns
     secondLine[formHelpers.randomizer()].arr.push(animal1.word);
     secondLine.syllables -= animal1.syllables;
 
@@ -37,9 +33,7 @@ const logicParts = {
   },
 
   insertVerbActive(lines, verbActive, verbs, nouns) {
-    let firstLine = lines[0];
-    let secondLine = lines[1];
-    let thirdLine = lines[2];
+    let [firstLine, secondLine, thirdLine] = lines;
 
     const findLine = (line, verbActive) => {
       let lineA = Object.values(line).find(

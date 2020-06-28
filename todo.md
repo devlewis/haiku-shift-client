@@ -1,3 +1,4 @@
-- finish commenting form-logic-grammar.js
+- define what is happening and totally refactor.
+- refactor form-logic-grammar.js
 - finish form-helpers-test.js
 - break down filler1, filler2
