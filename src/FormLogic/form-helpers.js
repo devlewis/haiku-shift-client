@@ -3,6 +3,45 @@ const articlesBank = ["the", "a"];
 const helperBank = ["will", "did", "should", "could", "might"];
 
 const formHelpers = {
+  pushRandomAdjective(key, line, adjectivesArr, adjOneS) {
+    if (
+      line["syllables"] > 0 &&
+      line[key]["verb"] === false &&
+      line[key]["arr"].length > 0 &&
+      this.randomizer() === 1
+    ) {
+      let adjs = adjectivesArr.map((a) => a.word);
+      if (
+        adjs.includes(line[key]["arr"][0]) ||
+        adjs.includes(line[key]["arr"][1]) ||
+        adjs.includes(line[key]["arr"][2])
+      ) {
+        let adjs = adjectivesArr.filter(
+          (a) => a.syllables <= line["syllables"]
+        );
+        let randomAdj = adjs.splice(
+          [Math.floor(Math.random() * adjOneS.length)],
+          1
+        )[0];
+        line[key]["arr"].unshift(randomAdj.word + ",");
+
+        line["syllables"] = line["syllables"] -= randomAdj.syllables;
+      } else {
+        let adjs = adjectivesArr.filter(
+          (a) => a.syllables <= line["syllables"]
+        );
+        let randomAdj = adjs.splice(
+          [Math.floor(Math.random() * adjOneS.length)],
+          1
+        )[0];
+
+        line[key]["arr"].unshift(randomAdj.word);
+
+        line["syllables"] = line["syllables"] -= randomAdj.syllables;
+      }
+    }
+  },
+
   pushArticle(key, line) {
     if (
       key === ["1"] &&
@@ -76,7 +115,7 @@ const formHelpers = {
         !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
     );
     if (lineA) {
-      let art = formHelpers.randomArticle();
+      let art = this.randomArticle();
       lineA["arr"].push(verbActive.word, art);
       lineA["verb"] = true;
       lineA["art"] = art;
@@ -90,10 +129,10 @@ const formHelpers = {
   linesPunctCaps(linesFinal) {
     linesFinal.forEach((line, i) => {
       line = line.trim();
-      if (formHelpers.randomizer() === 1) {
-        linesFinal[i] = line + formHelpers.randomPunct();
+      if (this.randomizer() === 1) {
+        linesFinal[i] = line + this.randomPunct();
       }
-      if (formHelpers.randomizer() === 1) {
+      if (this.randomizer() === 1) {
         linesFinal[i] = line[0].toUpperCase() + line.slice(1);
       }
     });
@@ -103,7 +142,7 @@ const formHelpers = {
   linesRandomizer(linesFinal) {
     const sevenSylLines = linesFinal.splice(1, 1)[0];
 
-    const randomLine = linesFinal.splice([formHelpers.randomizer1()], 1)[0];
+    const randomLine = linesFinal.splice([this.randomizer1()], 1)[0];
 
     const otherLine = linesFinal[0];
 
