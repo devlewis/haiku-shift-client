@@ -83,7 +83,7 @@ const formHelpers = {
     )[0];
   },
 
-  linesA(lines) {
+  linesAvailability(lines) {
     return lines.find((line) => line["syllables"] >= 4);
   },
 

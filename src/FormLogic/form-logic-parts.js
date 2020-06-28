@@ -20,7 +20,7 @@ const logicParts = {
   },
 
   insertAdjIf3(lines, adjs) {
-    let linesA = formHelpers.linesA(lines);
+    let linesA = formHelpers.linesAvailability(lines);
     if (linesA) {
       let arr = Object.values(linesA).find(
         (obj) => Object.values(obj)[0].length === 1
