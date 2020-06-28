@@ -3,6 +3,34 @@ const articlesBank = ["the", "a"];
 const helperBank = ["will", "did", "should", "could", "might"];
 
 const formHelpers = {
+  pushArticle(key, line) {
+    if (
+      key === ["1"] &&
+      line["syllables"] > 0 &&
+      line[key]["arr"].length > 0 &&
+      line[key]["verb"] === false &&
+      line[key]["art"] === false
+    ) {
+      let art = this.randomArticle();
+      if (
+        art === "a" &&
+        line["syllables"] > 1 &&
+        line["2"]["verb"] === true &&
+        line["2"]["arr"].length === 1
+      ) {
+        let help = this.randomHelper();
+        line[key]["arr"].unshift(art);
+        line[key]["art"] = art;
+        line["2"]["arr"].unshift(help);
+        line["syllables"] = line["syllables"] -= 2;
+      } else {
+        line[key]["arr"].unshift("the");
+        line[key]["art"] = "the";
+        line["syllables"] = line["syllables"] -= 1;
+      }
+    }
+  },
+
   pushRandomHelper(key, line) {
     if (
       key === "1" &&
