@@ -33,7 +33,9 @@ function setBanks(nouns, adjs, verbs) {
   let openArr = logicParts.openArr(line, nouns);
 
   //push verb to line
-  line = logicParts.pushVerb(openArr, line, linesNoV, randomVP);
+  if (openArr) {
+    line = logicParts.pushVerb(openArr, line, linesNoV, randomVP);
+  }
 
   /////////add adjectives/////////
 
