@@ -3,37 +3,6 @@ const articlesBank = ["the", "a"];
 const helperBank = ["will", "did", "should", "could", "might"];
 
 const formHelpers = {
-  addVerbActive(line, verbActive, verbs, nouns) {
-    let lineA = Object.values(line).find(
-      (a) =>
-        typeof a === "object" &&
-        !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
-    );
-    if (lineA) {
-      let art = this.randomArticle();
-      lineA["arr"].push(verbActive.word, art);
-      lineA["verb"] = true;
-      lineA["art"] = art;
-      verbs.splice(0, 1);
-      line.syllables -= verbActive.syllables;
-      line.syllables -= 1;
-    }
-    return line;
-  },
-
-  linesPunctCaps(linesFinal) {
-    linesFinal.forEach((line, i) => {
-      line = line.trim();
-      if (this.randomizer() === 1) {
-        linesFinal[i] = line + this.randomPunct();
-      }
-      if (this.randomizer() === 1) {
-        linesFinal[i] = line[0].toUpperCase() + line.slice(1);
-      }
-    });
-    return linesFinal;
-  },
-
   linesRandomizer(linesFinal) {
     const sevenSylLines = linesFinal.splice(1, 1)[0];
 
@@ -164,6 +133,36 @@ const formHelpers = {
 
       return line["1"]["arr"] + " " + line["2"]["arr"];
     });
+  },
+  addVerbActive(line, verbActive, verbs, nouns) {
+    let lineA = Object.values(line).find(
+      (a) =>
+        typeof a === "object" &&
+        !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0)
+    );
+    if (lineA) {
+      let art = this.randomArticle();
+      lineA["arr"].push(verbActive.word, art);
+      lineA["verb"] = true;
+      lineA["art"] = art;
+      verbs.splice(0, 1);
+      line.syllables -= verbActive.syllables;
+      line.syllables -= 1;
+    }
+    return line;
+  },
+
+  linesPunctCaps(linesFinal) {
+    linesFinal.forEach((line, i) => {
+      line = line.trim();
+      if (this.randomizer() === 1) {
+        linesFinal[i] = line + this.randomPunct();
+      }
+      if (this.randomizer() === 1) {
+        linesFinal[i] = line[0].toUpperCase() + line.slice(1);
+      }
+    });
+    return linesFinal;
   },
 };
 
