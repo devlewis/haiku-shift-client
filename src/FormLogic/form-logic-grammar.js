@@ -50,7 +50,6 @@ export default function grammar(lines, verbs_pArr) {
               lines[i]["2"]["arr"] =
                 lines[i]["2"]["arr"][lines[i]["2"]["arr"].length - 1];
             } else {
-              //////////////else,
               let lastWord =
                 lines[i]["2"]["arr"][lines[i]["2"]["arr"].length - 1];
               let lastWordObj = verbs_pArr.find(
