@@ -26,17 +26,11 @@ const formHelpers = {
   },
 
   randomArticle() {
-    return articlesBank.splice(
-      [Math.floor(Math.random() * articlesBank.length)],
-      1
-    )[0];
+    return articlesBank[Math.floor(Math.random() * articlesBank.length)];
   },
 
   randomHelper() {
-    return helperBank.splice(
-      [Math.floor(Math.random() * helperBank.length)],
-      1
-    )[0];
+    return helperBank[Math.floor(Math.random() * helperBank.length)];
   },
 
   randomizer() {
@@ -64,10 +58,7 @@ const formHelpers = {
   },
 
   randomPunct() {
-    return punctBank.splice(
-      [Math.floor(Math.random() * punctBank.length)],
-      1
-    )[0];
+    return punctBank[Math.floor(Math.random() * punctBank.length)];
   },
 
   linesAvailability(lines) {
@@ -124,11 +115,9 @@ const formHelpers = {
   finalizeLines(lines) {
     return lines.map((line) => {
       let keyArr = Object.keys(line);
-
+      keyArr.splice(-1);
       keyArr.forEach((key) => {
-        if (key !== "syllables") {
-          line[key]["arr"] = line[key]["arr"].join(" ");
-        }
+        line[key]["arr"] = line[key]["arr"].join(" ");
       });
 
       return line["1"]["arr"] + " " + line["2"]["arr"];

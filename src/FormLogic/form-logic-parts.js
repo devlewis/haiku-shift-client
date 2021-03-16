@@ -78,12 +78,14 @@ const logicParts = {
   },
 
   openArr(line, nouns) {
-    return Object.values(line).find(
-      (a) =>
-        typeof a === "object" &&
-        !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0) &&
-        a["verb"] === false
-    );
+    return line
+      ? Object.values(line).find(
+          (a) =>
+            typeof a === "object" &&
+            !a["arr"].some((r) => nouns.map((a) => a.word).indexOf(r) >= 0) &&
+            a["verb"] === false
+        )
+      : "there was an error, sorry!";
   },
 
   pushVerb(openArr, line, linesNoV, randomVP) {

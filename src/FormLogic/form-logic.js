@@ -46,7 +46,9 @@ const formLogic = (
 
   linesFinal = formHelpers.linesPunctCaps(linesFinal);
 
-  return formHelpers.linesRandomizer(linesFinal);
+  let randomLines = formHelpers.linesRandomizer(linesFinal);
+
+  return randomLines;
 };
 
 export default formLogic;

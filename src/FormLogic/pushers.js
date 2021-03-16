@@ -49,6 +49,7 @@ const pushers = {
       line[key]["art"] === false
     ) {
       let art = formHelpers.randomArticle();
+      console.log("art", art);
       if (
         art === "a" &&
         line["syllables"] > 1 &&
@@ -56,6 +57,7 @@ const pushers = {
         line["2"]["arr"].length === 1
       ) {
         let help = formHelpers.randomHelper();
+        console.log(help);
         line[key]["arr"].unshift(art);
         line[key]["art"] = art;
         line["2"]["arr"].unshift(help);
@@ -76,6 +78,7 @@ const pushers = {
       line["syllables"] > 0
     ) {
       let help = formHelpers.randomHelper();
+      console.log(help);
       line["2"]["arr"].unshift(help);
       line["syllables"] = line["syllables"] -= 1;
     }
